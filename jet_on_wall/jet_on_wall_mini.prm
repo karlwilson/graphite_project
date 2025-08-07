@@ -67,7 +67,7 @@ subsection mesh adaptation
   set fraction coarsening = 0.1
   set min refinement level = 0
   set max refinement level = 3
-  set initial refinement steps = 1
+  set initial refinement steps = 0
 end
 
 
@@ -76,7 +76,7 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity order = 2
+  set velocity order = 1
   set pressure order = 1
 end
 

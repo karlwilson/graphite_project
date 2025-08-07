@@ -16,7 +16,7 @@ exp = 1.05;
 // Charging zone
 
 wc = 0.007; // width/height of charging zone
-sq = 0.004; // width/height of square inside circle
+sq = 0.0054; // width/height of square inside circle
 dc = 0.036; // depth in z of charging zone
 nhc = 10; // number of points in height/width of charging zone
 nwc = 3; // number of points in the width/height of the square
