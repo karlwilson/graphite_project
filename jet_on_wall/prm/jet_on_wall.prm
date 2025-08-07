@@ -14,11 +14,11 @@ set dimension = 3
 subsection simulation control
   set method            = bdf2
   set output name       = jet_on_wall_fluid_output
-  set output path       = $GRAPHITE_PATH/jet_on_wall/jet_on_wall_fluid_output_2/
+  set output path       = /home/zouave/links/scratch/graphite_project/jet_on_wall/jet_on_wall_fluid_output_2/
   set output control    = time
   set output time frequency  = 0.01
   set time step         = 0.0005
-  set time end          = 5
+  set time end          = 2
   set adapt             = true
   set max cfl           = 1
 end
@@ -50,7 +50,7 @@ end
 
 subsection mesh
   set type          = gmsh
-  set file name     = /home/zouave/scratch/graphite_project/jet_on_wall/cylinder_jet_on_wall.msh
+  set file name     = /home/zouave/links/scratch/graphite_project/jet_on_wall/meshes/cylinder_jet_on_wall_coarse.msh
   set initial refinement = 0
 end
 
@@ -62,12 +62,12 @@ subsection mesh adaptation
   set type          = kelly
   set variable      = velocity
   set frequency     = 10
-  set max number elements = 1000000
+  set max number elements = 2000000
   set fraction refinement = 0.2
   set fraction coarsening = 0.1
   set min refinement level = 0
   set max refinement level = 3
-  set initial refinement steps = 0
+  set initial refinement steps = 1
 end
 
 
@@ -76,7 +76,7 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity order = 1
+  set velocity order = 2
   set pressure order = 1
 end
 
@@ -87,6 +87,15 @@ end
 subsection timer
   set type = iteration
 end
+
+#---------------------------------------------------
+# Restart
+#---------------------------------------------------
+
+subsection restart
+  set checkpoint = true
+  set frequency  = 20
+  set filename   = restart
 
 #---------------------------------------------------
 # Boundary Conditions
