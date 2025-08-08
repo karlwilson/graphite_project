@@ -60,3 +60,6 @@
 
 # Doc
 *__pycache__
+
+# Lethe restart files
+restart.*
