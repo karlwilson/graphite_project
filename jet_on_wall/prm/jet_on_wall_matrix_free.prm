@@ -69,7 +69,7 @@ subsection mesh adaptation
   set fraction coarsening = 0.1
   set min refinement level = 0
   set max refinement level = 3
-  set initial refinement steps = 1
+  set initial refinement steps = 0
 end
 
 
@@ -79,7 +79,7 @@ end
 
 subsection FEM
   set velocity order = 2
-  set pressure order = 1
+  set pressure order = 2
 end
 
 #---------------------------------------------------
@@ -96,7 +96,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 20
+  set frequency  = 30
   set filename   = restart
 end
 
@@ -155,7 +155,7 @@ subsection non-linear solver
   subsection fluid dynamics
     set solver          = newton
     set verbosity       = verbose
-    set tolerance       = 1e-4
+    set tolerance       = 1e-3
     set max iterations  = 25
   end
 end
@@ -168,14 +168,27 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 400
-    set relative residual                     = 1e-3
-    set minimum residual                      = 1e-6
-    set preconditioner                        = ilu
-    set ilu preconditioner fill               = 0
-    set ilu preconditioner absolute tolerance = 1e-12
-    set ilu preconditioner relative tolerance = 1.00
+    set max iters                             = 100
     set max krylov vectors                    = 200
+    set relative residual                     = 1e-4
+    set minimum residual                      = 1e-7
+    set preconditioner                        = gcmg
+
+    # MG parameters
+    set mg verbosity                          = quiet
+    set mg enable hessians in jacobian        = false
+
+    # Smoother
+    set mg smoother iterations                = 5
+    set mg smoother eig estimation            = true
+
+    # Eigenvalue estimation parameters
+    set eig estimation smoothing range        = 5
+    set eig estimation cg n iterations        = 20
+    set eig estimation verbosity              = quiet
+
+    # Coarse-grid solver
+    set mg coarse grid solver                 = direct
   end
 end
 
