@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --time=1-00:00
+#SBATCH --time=0-00:30
 #SBATCH --account=rrg-blaisbru
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=192
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=48
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=500G
 #SBATCH --mail-user=charles.wilson@umontreal.ca
@@ -12,6 +12,8 @@ export OMP_NUM_THREADS=1
 ulimit -s 8192
 set -e
 
+export PMIXP_COLL_TIMEOUT=600
+
 source $HOME/.bashrc
 source $HOME/.dealii
-srun $HOME/lethe/inst/bin/lethe-fluid $GRAPHITE_PATH/jet_on_wall/prm/jet_on_wall.prm
+srun $HOME/lethe/inst/bin/lethe-fluid-matrix-free $GRAPHITE_PATH/jet_on_wall/prm/jet_on_wall_matrix_free.prm
