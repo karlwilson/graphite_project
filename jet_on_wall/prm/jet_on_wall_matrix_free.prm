@@ -14,7 +14,7 @@ set dimension = 3
 subsection simulation control
   set method            = bdf2
   set output name       = jet_on_wall_fluid_output
-  set output path       = /home/zouave/links/scratch/graphite_project/jet_on_wall/jet_on_wall_fluid_output_every_iter/
+  set output path       = /home/zouave/links/scratch/graphite_project/jet_on_wall/jet_on_wall_fluid_output_mf/
   set output control    = iteration
   set output frequency  = 1
   set time step         = 0.00005
@@ -50,8 +50,8 @@ end
 
 subsection mesh
   set type          = gmsh
-  set file name     = /home/zouave/links/scratch/graphite_project/jet_on_wall/meshes/cylinder_jet_on_wall_coarse.msh
-  set initial refinement = 0
+  set file name     = /home/zouave/links/scratch/graphite_project/jet_on_wall/meshes/cylinder_jet_on_wall_very_coarse.msh
+  set initial refinement = 3
   set initial boundary refinement = 1
   set boundaries refined = 0,3
 end
@@ -188,7 +188,7 @@ subsection linear solver
     set eig estimation verbosity              = quiet
 
     # Coarse-grid solver
-    set mg coarse grid solver                 = direct
+    set mg coarse grid solver                 = amg
   end
 end
 
