@@ -4,7 +4,7 @@
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=192
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=500G
+#SBATCH --mem=749G
 #SBATCH --mail-user=charles.wilson@umontreal.ca
 #SBATCH --mail-type=BEGIN,END,FAIL
 

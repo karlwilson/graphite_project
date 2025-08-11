@@ -1,8 +1,8 @@
 #!/bin/bash
-#SBATCH --time=0-00:30
+#SBATCH --time=1-00:00
 #SBATCH --account=rrg-blaisbru
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=48
+#SBATCH --ntasks-per-node=64
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=500G
 #SBATCH --mail-user=charles.wilson@umontreal.ca
@@ -11,8 +11,6 @@
 export OMP_NUM_THREADS=1
 ulimit -s 8192
 set -e
-
-export PMIXP_COLL_TIMEOUT=600
 
 source $HOME/.bashrc
 source $HOME/.dealii
