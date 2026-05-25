@@ -1,10 +1,10 @@
 #!/bin/bash
 #SBATCH --time=1-00:00
 #SBATCH --account=rrg-blaisbru
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=64
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=96
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=500G
+#SBATCH --mem=749G
 #SBATCH --mail-user=charles.wilson@umontreal.ca
 #SBATCH --mail-type=BEGIN,END,FAIL
 

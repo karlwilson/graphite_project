@@ -16,7 +16,7 @@ subsection simulation control
   set output name       = jet_on_wall_fluid_output
   set output path       = /home/zouave/links/scratch/graphite_project/jet_on_wall/jet_on_wall_fluid_output_mf/
   set output control    = iteration
-  set output frequency  = 1
+  set output frequency  = 10
   set time step         = 0.00005
   set time end          = 2
   set adapt             = true
@@ -51,7 +51,7 @@ end
 subsection mesh
   set type          = gmsh
   set file name     = /home/zouave/links/scratch/graphite_project/jet_on_wall/meshes/cylinder_jet_on_wall_very_coarse.msh
-  set initial refinement = 3
+  set initial refinement = 2
   set initial boundary refinement = 1
   set boundaries refined = 0,3
 end
@@ -98,6 +98,9 @@ subsection restart
   set checkpoint = true
   set frequency  = 30
   set filename   = restart
+  
+  # Restarting parameter
+  set restart    = false
 end
 
 #---------------------------------------------------
@@ -153,7 +156,7 @@ end
 
 subsection non-linear solver
   subsection fluid dynamics
-    set solver          = newton
+    set solver          = inexact_newton
     set verbosity       = verbose
     set tolerance       = 1e-3
     set max iterations  = 25
@@ -168,24 +171,24 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 100
+    set max iters                             = 1000
     set max krylov vectors                    = 200
-    set relative residual                     = 1e-4
-    set minimum residual                      = 1e-7
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-6
     set preconditioner                        = gcmg
 
     # MG parameters
-    set mg verbosity                          = quiet
-    set mg enable hessians in jacobian        = false
+    set mg verbosity                          = verbose
+    set mg enable hessians in jacobian        = true
 
     # Smoother
-    set mg smoother iterations                = 5
+    set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
 
     # Eigenvalue estimation parameters
-    set eig estimation smoothing range        = 5
+    set eig estimation smoothing range        = 10
     set eig estimation cg n iterations        = 20
-    set eig estimation verbosity              = quiet
+    set eig estimation verbosity              = verbose
 
     # Coarse-grid solver
     set mg coarse grid solver                 = amg
