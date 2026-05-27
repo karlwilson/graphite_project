@@ -50,7 +50,7 @@ end
 subsection mesh
   set type          = gmsh
   set file name     = cylinder_jet_on_wall_very_coarse.msh
-  set initial refinement = 2
+  set initial refinement = 3
   set initial boundary refinement = 1
   set boundaries refined = 0,3
 end
@@ -77,8 +77,8 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity order = 2
-  set pressure order = 2
+  set velocity order = 1
+  set pressure order = 1
 end
 
 #---------------------------------------------------
