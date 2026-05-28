@@ -12,17 +12,17 @@ set dimension = 2
 #---------------------------------------------------
 
 subsection simulation control
-  set method            = bdf2
-  set output name       = jet_on_wall_2d_fluid
-  set output path       = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations
-  set output control    = iteration
-  set output frequency  = 100
-  set log frequency     = 100
-  set time step         = 0.00005
-  set time end          = 1
-  set adapt             = true
-  set max cfl           = 1
-  set output boundaries = true
+  set method                         = bdf2
+  set output name                    = jet_on_wall_2d_fluid
+  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations
+  set output control                 = iteration
+  set output frequency               = 100
+  set log frequency                  = 100
+  set time step                      = 0.00005
+  set time end                       = 1
+  set adapt time step to respect CFL = true
+  set max cfl                        = 1
+  set output boundaries              = true
 end
 
 #---------------------------------------------------
@@ -173,15 +173,15 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 100
-    set max krylov vectors                    = 100
+    set max iters                             = 500
+    set max krylov vectors                    = 500
     set relative residual                     = 1e-4
     set minimum residual                      = 1e-8
     set preconditioner                        = gcmg
 
     # MG parameters
     set mg verbosity                          = verbose
-    set mg enable hessian in jacobian         = false
+    set mg enable hessians in jacobian        = false
     set mg coarse grid use fe q iso q1        = true
 
     # Smoother
