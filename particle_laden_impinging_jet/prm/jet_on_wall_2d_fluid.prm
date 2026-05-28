@@ -156,10 +156,12 @@ end
 
 subsection non-linear solver
   subsection fluid dynamics
-    set solver          = newton
-    set verbosity       = verbose
-    set tolerance       = 1e-5
-    set max iterations  = 10
+    set solver                = inexact newton
+    set matrix tolerance      = 0.1
+    set reuse matrix          = true
+    set verbosity             = verbose
+    set tolerance             = 1e-5
+    set max iterations        = 10
     set force rhs calculation = true
   end
 end
@@ -172,8 +174,8 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 500
-    set max krylov vectors                    = 500
+    set max iters                             = 1000
+    set max krylov vectors                    = 200
     set relative residual                     = 1e-4
     set minimum residual                      = 1e-8
     set preconditioner                        = amg
