@@ -6,14 +6,15 @@
 
 set dimension = 2
 
+
 #---------------------------------------------------
 # Simulation Control
 #---------------------------------------------------
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jet_on_wall_2d_fluid
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/
+  set output name                    = jet_on_wall_2d_particle_fluid
+  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 100
@@ -51,7 +52,7 @@ end
 
 subsection mesh
   set type          = gmsh
-  set file name     = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d.msh
+  set file name     = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_fluid.msh
   set initial refinement = 2
   set initial boundary refinement = 1
   set boundaries refined = 0,3
@@ -79,8 +80,8 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity order = 2
-  set pressure order = 2
+  set velocity order = 1
+  set pressure order = 1
 end
 
 #---------------------------------------------------
@@ -176,24 +177,10 @@ subsection linear solver
     set max krylov vectors                    = 500
     set relative residual                     = 1e-4
     set minimum residual                      = 1e-8
-    set preconditioner                        = gcmg
+    set preconditioner                        = amg
 
-    # MG parameters
-    set mg verbosity                          = verbose
-    set mg enable hessians in jacobian        = false
-    set mg coarse grid use fe q iso q1        = true
-
-    # Smoother
-    set mg smoother iterations                = 10
-    set mg smoother eig estimation            = true
-
-    # Eigenvalue estimation parameters
-    set eig estimation smoothing range        = 10
-    set eig estimation cg n iterations        = 20
-    set eig estimation verbosity              = verbose
-
-    # Coarse-grid solver
-    set mg coarse grid solver                 = amg
+    # AMG parameters
+    set amg preconditioner ilu fill           = 1
   end
 end
 

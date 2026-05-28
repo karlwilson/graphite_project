@@ -19,28 +19,28 @@ dc = 0.036;  // nozzle length
 zc = 40;     // cells in flow direction (nozzle)
 nhc = 10;    // points across nozzle half-width
 
-// Points — nozzle-chamber junction level (y = 0)
-Point(1) = {-hp/2, 0, 0};   // chamber: outer left
-Point(2) = {-wc/2, 0, 0};   // junction: inner left
-Point(3) = { wc/2, 0, 0};   // junction: inner right
-Point(4) = { hp/2, 0, 0};   // chamber: outer right
+// Points — nozzle-chamber junction level (x = 0)
+Point(1) = {0, -hp/2, 0};   // chamber: outer left
+Point(2) = {0, -wc/2, 0};   // junction: inner left
+Point(3) = {0,  wc/2, 0};   // junction: inner right
+Point(4) = {0,  hp/2, 0};   // chamber: outer right
 
-// Points — impingement wall (y = dp)
-Point(5) = {-hp/2, dp, 0};
-Point(6) = {-wc/2, dp, 0};
-Point(7) = { wc/2, dp, 0};
-Point(8) = { hp/2, dp, 0};
+// Points — impingement wall (x = dp)
+Point(5) = {dp, -hp/2, 0};
+Point(6) = {dp, -wc/2, 0};
+Point(7) = {dp,  wc/2, 0};
+Point(8) = {dp,  hp/2, 0};
 
-// Points — nozzle inlet (y = -dc)
-Point(9)  = {-wc/2, -dc, 0};
-Point(10) = { wc/2, -dc, 0};
+// Points — nozzle inlet (x = -dc)
+Point(9)  = {-dc, -wc/2, 0};
+Point(10) = {-dc,  wc/2, 0};
 
-// Lines — junction level (y = 0)
+// Lines — junction level (x = 0)
 Line(1) = {1, 2};    // left anterior wall
 Line(2) = {2, 3};    // jet entry opening
 Line(3) = {3, 4};    // right anterior wall
 
-// Lines — impingement wall (y = dp)
+// Lines — impingement wall (x = dp)
 Line(4) = {5, 6};    // left section
 Line(5) = {6, 7};    // center section
 Line(6) = {7, 8};    // right section
