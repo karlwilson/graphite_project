@@ -15,7 +15,7 @@ exp = 1.05;  // grading progression toward jet axis
 
 // Jet nozzle (charging zone)
 wc = 0.007;  // nozzle width
-dc = 0.036;  // nozzle length
+dc = 0.072;  // nozzle length
 zc = 40;     // cells in flow direction (nozzle)
 nhc = 10;    // points across nozzle half-width
 

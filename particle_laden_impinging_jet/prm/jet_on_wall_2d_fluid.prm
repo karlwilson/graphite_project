@@ -14,7 +14,7 @@ set dimension = 2
 subsection simulation control
   set method                         = bdf2
   set output name                    = jet_on_wall_2d_fluid
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid/
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 100
@@ -53,7 +53,7 @@ end
 subsection mesh
   set type          = gmsh
   set file name     = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d.msh
-  set initial refinement = 2
+  set initial refinement = 3
   set initial boundary refinement = 1
   set boundaries refined = 0,3
 end
@@ -70,8 +70,8 @@ subsection mesh adaptation
   set fraction refinement = 0.2
   set fraction coarsening = 0.1
   set min refinement level = 0
-  set max refinement level = 3
-  set initial refinement steps = 0
+  set max refinement level = 4
+  set initial refinement steps = 1
 end
 
 
@@ -98,7 +98,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 50
+  set frequency  = 1000
   set filename   = restart
   set restart    = false
 end
@@ -156,7 +156,7 @@ end
 
 subsection non-linear solver
   subsection fluid dynamics
-    set solver                = inexact newton
+    set solver                = inexact_newton
     set matrix tolerance      = 0.1
     set reuse matrix          = true
     set verbosity             = verbose
