@@ -14,7 +14,7 @@ set dimension = 2
 subsection simulation control
   set method                         = bdf2
   set output name                    = jet_on_wall_2d_fluid
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 100
