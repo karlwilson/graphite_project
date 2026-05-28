@@ -3,8 +3,8 @@
 #SBATCH --account=rrg-blaisbru
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=192
-#SBATCH --mail-user=charles.wilson@umontreal.ca
-#SBATCH --mail-type=BEGIN,END,FAIL
+#SBATCH --mail-user=charles.wilson@etud.polymtl.ca
+#SBATCH --mail-type=ALL
 #SBATCG --job-name=jet_on_wall_2d_fluid
 
 export OMP_NUM_THREADS=1

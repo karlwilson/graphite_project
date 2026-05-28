@@ -14,7 +14,7 @@ set dimension = 2
 subsection simulation control
   set method                         = bdf2
   set output name                    = jet_on_wall_2d_fluid
-  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 100
@@ -52,7 +52,7 @@ end
 
 subsection mesh
   set type          = gmsh
-  set file name     = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_fluid.msh
+  set file name     = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d.msh
   set initial refinement = 2
   set initial boundary refinement = 1
   set boundaries refined = 0,3
@@ -115,10 +115,10 @@ subsection boundary conditions
     set id      = 0
     set type    = function
     subsection u
-        set Function expression = if(t<0.005, (600*t + 2), 5)
+        set Function expression = 0
     end
     subsection v
-        set Function expression = 0
+        set Function expression = if(t<0.005, (600*t + 2), 5)
     end
     subsection w
         set Function expression = 0
@@ -128,10 +128,10 @@ subsection boundary conditions
     set id      = 1
     set type    = function
     subsection u
-      set Function expression = 0.1
+      set Function expression = 0
     end
     subsection v
-      set Function expression = 0
+      set Function expression = 0.1
     end
     subsection w
       set Function expression = 0
