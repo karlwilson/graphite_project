@@ -2,9 +2,9 @@
 // SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception OR LGPL-2.1-or-later
 
 // 2D midplane cross-section of a particle-laden jet impinging on a wall.
-// x-axis: lateral (horizontal), y-axis: flow direction (positive toward wall).
-// Domain: nozzle (wc wide, dc tall) connected to chamber (hp wide, dp tall).
-// Nozzle-chamber junction is at y=0; impingement wall is at y=dp.
+// x-axis: flow direction (horizontal), y-axis: height along wall (vertical).
+// Domain: nozzle (dc long, wc wide) connected to chamber (dp deep, hp tall).
+// Nozzle-chamber junction is at x=0; impingement wall is at x=dp.
 
 // Projection zone (main chamber)
 hp = 0.18;   // width of chamber
