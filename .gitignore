@@ -63,3 +63,6 @@
 
 # Lethe restart files
 restart.*
+
+# Slurm scripts, because cluster specific
+slurm_scripts/
