@@ -76,7 +76,8 @@ end
 
 #---------------------------------------------------
 # Box Refinement
-#---------------------------------------------------
+#--------------------------------------------------
+subsection box refinement
 set number of refinement boxes = 1
   subsection box 0
     subsection mesh
