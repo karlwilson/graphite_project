@@ -13,8 +13,9 @@ set dimension = 2
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jet_on_wall_2d_fluid
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid/
+  set output name                    = jet_on_wall_2d_fluid_1
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_1/
+  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_1/
   set output control                 = iteration
   set output frequency               = 500
   set log frequency                  = 1
@@ -51,11 +52,13 @@ end
 #---------------------------------------------------
 
 subsection mesh
-  set type          = gmsh
-  set file name     = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d.msh
-  set initial refinement = 3
+  set type                        = gmsh
+  
+  set file name                   = /scratch/zouave/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d.msh
+  # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d.msh
+  set initial refinement          = 2
   set initial boundary refinement = 1
-  set boundaries refined = 0,3
+  set boundaries refined          = 0,1,2,3
 end
 
 #---------------------------------------------------
@@ -63,15 +66,16 @@ end
 #---------------------------------------------------
 
 subsection mesh adaptation
-  set type          = none
-  set variable      = velocity
-  set frequency     = 100
-  set max number elements = 2000000
-  set fraction refinement = 0.2
-  set fraction coarsening = 0.1
-  set min refinement level = 0
-  set max refinement level = 4
-  set initial refinement steps = 1
+  set type                     = adaptive
+  set variable                 = velocity
+  set error estimator          = kelly
+  set frequency                = 100
+  set max number elements      = 2000000
+  set fraction refinement      = 0.2
+  set fraction coarsening      = 0.1
+  set min refinement level     = 0
+  set max refinement level     = 7
+  set initial refinement steps = 0
 end
 
 #---------------------------------------------------
@@ -83,11 +87,11 @@ set number of refinement boxes = 1
     subsection mesh
       set type                    = dealii
       set grid type               = hyper_cube
-      set grid arguments          = -0.007 : 0.007 : false
+      set grid arguments          = -0.0035 : 0.007 : false
       set initial refinement      = 0
-      set scale = 1
+      set scale                   = 1
     end
-    set additional refinement = 2
+    set additional refinement = 1
   end
 end
 
@@ -115,9 +119,9 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 10000
+  set frequency  = 1000
   set filename   = restart
-  set restart    = true
+  set restart    = false
 end
 
 #---------------------------------------------------
@@ -174,8 +178,6 @@ end
 subsection non-linear solver
   subsection fluid dynamics
     set solver                = newton
-    #set matrix tolerance      = 0.1
-    #set reuse matrix          = true
     set verbosity             = verbose
     set tolerance             = 1e-5
     set max iterations        = 10
@@ -191,9 +193,9 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 1000
+    set max iters                             = 200
     set max krylov vectors                    = 200
-    set relative residual                     = 1e-4
+    set relative residual                     = 1e-5
     set minimum residual                      = 1e-8
     set preconditioner                        = amg
 

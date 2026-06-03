@@ -9,15 +9,15 @@
 // Projection zone (main chamber)
 hp = 0.18;   // width of chamber
 dp = 0.02;   // height of chamber (jet-to-wall distance)
-zp = 20;     // cells in flow direction (chamber)
-nhp = 31;    // points across each chamber half-width (graded toward jet)
+zp = 8;     // cells in flow direction (chamber)
+nhp = 15;    // points across each chamber half-width (graded toward jet)
 exp = 1.05;  // grading progression toward jet axis
 
 // Jet nozzle (charging zone)
 wc = 0.007;  // nozzle width
 dc = 0.072;  // nozzle length
-zc = 40;     // cells in flow direction (nozzle)
-nhc = 10;    // points across nozzle half-width
+zc = 21;     // cells in flow direction (nozzle)
+nhc = 5;    // points across nozzle half-width
 
 // Points — nozzle-chamber junction level (x = 0)
 Point(1) = {0, -hp/2, 0};   // chamber: outer left
