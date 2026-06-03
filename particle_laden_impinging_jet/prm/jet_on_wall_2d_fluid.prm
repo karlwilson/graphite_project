@@ -16,7 +16,7 @@ subsection simulation control
   set output name                    = jet_on_wall_2d_fluid
   set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid/
   set output control                 = iteration
-  set output frequency               = 100
+  set output frequency               = 500
   set log frequency                  = 1
   set time step                      = 0.00005
   set time end                       = 1
@@ -117,7 +117,7 @@ subsection restart
   set checkpoint = true
   set frequency  = 10000
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------
