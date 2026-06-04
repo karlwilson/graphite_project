@@ -21,7 +21,7 @@ subsection simulation control
   set time step                      = 0.00005
   set time end                       = 1
   set adapt time step to respect CFL = true
-  set max cfl                        = 0.5
+  set max cfl                        = 1
   set output boundaries              = true
 end
 

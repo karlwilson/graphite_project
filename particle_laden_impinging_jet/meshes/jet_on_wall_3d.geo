@@ -22,6 +22,7 @@ hp = 0.18; // height of projection zone
 wp = 0.18; // width of projection zone
 dp = 0.02; // depth in z of projection zone
 dt = dc + dp; // total depth of chamber
+hb = hp/2 - wc/2 - tc; // height of anterior segment of chamber
 zp = 20; // number of cells in the z direction (depth) of projection zone
 nhp = 31; // number of points in height of section of projection zone
 nwp = 31; // number of points in width of section of projection zone
