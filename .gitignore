@@ -53,7 +53,7 @@
 *.dat
 
 # meshes
-*.msh
+# *.msh
 
 # Ignore clion recommandation file
 .idea/*
