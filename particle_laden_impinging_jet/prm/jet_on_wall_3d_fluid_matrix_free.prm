@@ -53,7 +53,7 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /scratch/zouave/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d.msh
+  set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d.msh
   # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d.msh
   set initial refinement          = 2
   set initial boundary refinement = 1
