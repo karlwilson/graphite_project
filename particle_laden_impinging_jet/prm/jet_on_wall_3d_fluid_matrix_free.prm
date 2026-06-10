@@ -19,7 +19,7 @@ subsection simulation control
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 1
-  set time step                      = 0.00005
+  set time step                      = 0.000005
   set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
@@ -178,7 +178,7 @@ subsection non-linear solver
   subsection fluid dynamics
     set solver                = newton
     set verbosity             = verbose
-    set tolerance             = 1e-5
+    set tolerance             = 1e-4
     set max iterations        = 10
     set force rhs calculation = false
   end
@@ -194,12 +194,12 @@ subsection linear solver
     set method                                = gmres
     set max iters                             = 200
     set max krylov vectors                    = 200
-    set relative residual                     = 1e-5
-    set minimum residual                      = 1e-8
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-9
     set preconditioner                        = gcmg
 
     # MG parameters
-    set mg verbosity                          = quiet
+    set mg verbosity                          = verbose
     set mg enable hessians in jacobian        = false
     set mg coarse grid use fe q iso q1        = true
 
@@ -210,7 +210,7 @@ subsection linear solver
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
     set eig estimation cg n iterations        = 20
-    set eig estimation verbosity              = quiet
+    set eig estimation verbosity              = verbose
 
     # Coarse-grid solver
     set mg coarse grid solver                 = amg
