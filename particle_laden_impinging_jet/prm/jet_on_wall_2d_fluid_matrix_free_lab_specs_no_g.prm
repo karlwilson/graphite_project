@@ -4,8 +4,7 @@
 # Listing of Parameters
 #----------------------
 
-set dimension = 3
-
+set dimension = 2
 
 #---------------------------------------------------
 # Simulation Control
@@ -13,13 +12,13 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jet_on_wall_3d_fluid_lab_specs_1
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_3d_fluid_lab_specs_1/
-  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_3d_fluid_1/
+  set output name                    = jet_on_wall_2d_fluid_matrix_free_lab_specs
+  # set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
+  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 1
-  set time step                      = 0.000005
+  set time step                      = 0.00005
   set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
@@ -32,7 +31,7 @@ end
 
 subsection physical properties
   subsection fluid 0
-    set kinematic viscosity = 0.000015    # Re = 2400
+    set kinematic viscosity = 0.000015
     set density             = 1.2041
   end
 end
@@ -43,7 +42,7 @@ end
 
 subsection source term
   subsection fluid dynamics
-    set Function expression = 0;0;0;0
+    set Function expression = 0;-9.81;0
   end
 end
 
@@ -53,9 +52,9 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
-  # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d.msh
-  set initial refinement          = 4
+  # set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
+  set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
+  set initial refinement          = 2
   set initial boundary refinement = 1
   set boundaries refined          = 0,1,2,3
 end
@@ -69,7 +68,7 @@ subsection mesh adaptation
   set variable                 = velocity
   set error estimator          = kelly
   set frequency                = 100
-  set max number elements      = 2000000000
+  set max number elements      = 2000000
   set fraction refinement      = 0.2
   set fraction coarsening      = 0.1
   set min refinement level     = 0
@@ -77,16 +76,16 @@ subsection mesh adaptation
   set initial refinement steps = 0
 end
 
-#---------------------------------------------------
-# Box Refinement
-#--------------------------------------------------
+# #---------------------------------------------------
+# # Box Refinement
+# #---------------------------------------------------
 # subsection box refinement
 # set number of refinement boxes = 1
 #   subsection box 0
 #     subsection mesh
 #       set type                    = dealii
 #       set grid type               = hyper_cube
-#       set grid arguments          = -0.0035 : 0.007 : false
+#       set grid arguments          = -0.007 : 0.007 : false
 #       set initial refinement      = 0
 #       set scale                   = 1
 #     end
@@ -118,7 +117,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 10000
+  set frequency  = 1000
   set filename   = restart
   set restart    = false
 end
@@ -134,13 +133,13 @@ subsection boundary conditions
     set id      = 0
     set type    = function
     subsection u
-        set Function expression = 0
+        set Function expression = if(t<0.005, (600*t + 2), 5)
     end
     subsection v
         set Function expression = 0
     end
     subsection w
-        set Function expression = if(t<0.005, (600*t + 2), 5)
+        set Function expression = 0
     end
   end
   subsection bc 1
@@ -178,7 +177,7 @@ subsection non-linear solver
   subsection fluid dynamics
     set solver                = newton
     set verbosity             = verbose
-    set tolerance             = 1e-4
+    set tolerance             = 1e-5
     set max iterations        = 10
     set force rhs calculation = false
     set reuse preconditioner  = true
@@ -196,9 +195,10 @@ subsection linear solver
     set max iters                             = 200
     set max krylov vectors                    = 200
     set relative residual                     = 1e-4
-    set minimum residual                      = 1e-9
+    set minimum residual                      = 1e-8
     set enable hessians in jacobian           = true
     set enable hessians in residual           = true
+
     set preconditioner                        = gcmg
 
     # MG parameters
