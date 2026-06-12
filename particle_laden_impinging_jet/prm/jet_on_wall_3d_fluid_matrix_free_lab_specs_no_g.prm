@@ -72,6 +72,7 @@ subsection mesh adaptation
   set fraction coarsening      = 0.1
   set min refinement level     = 0
   set max refinement level     = 5
+  set max refinement level     = 5
   set initial refinement steps = 0
 end
 
