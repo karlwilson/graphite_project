@@ -12,8 +12,8 @@ set dimension = 2
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jet_on_wall_2d_fluid_matrix_free_lab_specs
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
+  set output name                    = jet_on_wall_2d_fluid_matrix_free_lab_specs_2
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs_2/
   # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
   set output control                 = iteration
   set output frequency               = 100
@@ -31,7 +31,8 @@ end
 
 subsection physical properties
   subsection fluid 0
-    set kinematic viscosity = 0.000015
+    # set kinematic viscosity = 0.000015
+    set kinematic viscosity = 1
     set density             = 1.2041
   end
 end
@@ -119,7 +120,7 @@ subsection restart
   set checkpoint = true
   set frequency  = 500
   set filename   = restart
-  set restart    = true
+  set restart    = false
 end
 
 #---------------------------------------------------
@@ -144,16 +145,7 @@ subsection boundary conditions
   end
   subsection bc 1
     set id      = 1
-    set type    = function
-    subsection u
-      set Function expression = 0
-    end
-    subsection v
-      set Function expression = 0
-    end
-    subsection w
-      set Function expression = 0
-    end
+    set type    = noslip
   end
   subsection bc 2
     set id      = 2

@@ -85,7 +85,7 @@ set number of refinement boxes = 1
     subsection mesh
       set type                    = dealii
       set grid type               = hyper_rectangle
-      set grid arguments          = -0.005, -0.005, -0.001 : 0.005, 0.005, 0.007 : false
+      set grid arguments          = -0.006, -0.006, -0.001 : 0.006, 0.006, 0.007 : false
       set initial refinement      = 0
       set scale                   = 1
     end
