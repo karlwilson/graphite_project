@@ -21,7 +21,7 @@ subsection simulation control
   set time step                      = 0.00001
   set time end                       = 1
   set adapt time step to respect CFL = true
-  set max cfl                        = 1
+  set max cfl                        = 2
   set output boundaries              = true
 end
 
@@ -55,7 +55,7 @@ subsection mesh
   set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
   set initial refinement          = 2
   set initial boundary refinement = 1
-  set boundaries refined          = 0,1,2,3
+  set boundaries refined          = 0,3
 end
 
 #---------------------------------------------------
@@ -78,19 +78,19 @@ end
 #---------------------------------------------------
 # Box Refinement
 #--------------------------------------------------
-# subsection box refinement
-# set number of refinement boxes = 1
-#   subsection box 0
-#     subsection mesh
-#       set type                    = dealii
-#       set grid type               = hyper_cube
-#       set grid arguments          = -0.0035 : 0.007 : false
-#       set initial refinement      = 0
-#       set scale                   = 1
-#     end
-#     set additional refinement = 1
-#   end
-# end
+subsection box refinement
+set number of refinement boxes = 1
+  subsection box 0
+    subsection mesh
+      set type                    = dealii
+      set grid type               = hyper_rectangle
+      set grid arguments          = -0.005, -0.005, -0.001 : 0.005, 0.005, 0.007 : false
+      set initial refinement      = 0
+      set scale                   = 1
+    end
+    set additional refinement = 2
+  end
+end
 
 
 #---------------------------------------------------

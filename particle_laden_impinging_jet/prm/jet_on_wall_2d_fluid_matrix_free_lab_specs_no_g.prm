@@ -13,15 +13,15 @@ set dimension = 2
 subsection simulation control
   set method                         = bdf2
   set output name                    = jet_on_wall_2d_fluid_matrix_free_lab_specs
-  # set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
-  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
+  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_2d_fluid_matrix_free_lab_specs/
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 1
   set time step                      = 0.00005
   set time end                       = 1
   set adapt time step to respect CFL = true
-  set max cfl                        = 1
+  set max cfl                        = 2
   set output boundaries              = true
 end
 
@@ -42,7 +42,7 @@ end
 
 subsection source term
   subsection fluid dynamics
-    set Function expression = 0;-9.81;0
+    set Function expression = 0;0;0
   end
 end
 
@@ -52,11 +52,11 @@ end
 
 subsection mesh
   set type                        = gmsh
-  # set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
-  set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
+  set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
+  # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
   set initial refinement          = 2
   set initial boundary refinement = 1
-  set boundaries refined          = 0,1,2,3
+  set boundaries refined          = 0,3
 end
 
 #---------------------------------------------------
@@ -117,9 +117,9 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 1000
+  set frequency  = 500
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------

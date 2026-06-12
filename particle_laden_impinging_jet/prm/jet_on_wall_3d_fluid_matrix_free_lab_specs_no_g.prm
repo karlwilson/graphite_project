@@ -15,14 +15,13 @@ subsection simulation control
   set method                         = bdf2
   set output name                    = jet_on_wall_3d_fluid_lab_specs_1
   set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_3d_fluid_lab_specs_1/
-  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jet_on_wall_3d_fluid_1/
   set output control                 = iteration
   set output frequency               = 100
   set log frequency                  = 1
   set time step                      = 0.000005
   set time end                       = 1
   set adapt time step to respect CFL = true
-  set max cfl                        = 1
+  set max cfl                        = 2
   set output boundaries              = true
 end
 
@@ -54,10 +53,9 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
-  # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d.msh
-  set initial refinement          = 4
+  set initial refinement          = 1
   set initial boundary refinement = 1
-  set boundaries refined          = 0,1,2,3
+  set boundaries refined          = 0,3
 end
 
 #---------------------------------------------------
@@ -73,26 +71,26 @@ subsection mesh adaptation
   set fraction refinement      = 0.2
   set fraction coarsening      = 0.1
   set min refinement level     = 0
-  set max refinement level     = 6
+  set max refinement level     = 5
   set initial refinement steps = 0
 end
 
 #---------------------------------------------------
 # Box Refinement
 #--------------------------------------------------
-# subsection box refinement
-# set number of refinement boxes = 1
-#   subsection box 0
-#     subsection mesh
-#       set type                    = dealii
-#       set grid type               = hyper_cube
-#       set grid arguments          = -0.0035 : 0.007 : false
-#       set initial refinement      = 0
-#       set scale                   = 1
-#     end
-#     set additional refinement = 1
-#   end
-# end
+subsection box refinement
+set number of refinement boxes = 1
+  subsection box 0
+    subsection mesh
+      set type                    = dealii
+      set grid type               = hyper_rectangle
+      set grid arguments          = -0.005, -0.005, -0.001 : 0.005, 0.005, 0.007 : false
+      set initial refinement      = 0
+      set scale                   = 1
+    end
+    set additional refinement = 2
+  end
+end
 
 
 #---------------------------------------------------
