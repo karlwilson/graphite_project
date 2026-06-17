@@ -21,7 +21,7 @@ subsection simulation control
   set time step                      = 0.00005
   set time end                       = 1
   set adapt time step to respect CFL = true
-  set max cfl                        = 2
+  set max cfl                        = 1
   set output boundaries              = true
 end
 
@@ -31,8 +31,8 @@ end
 
 subsection physical properties
   subsection fluid 0
-    # set kinematic viscosity = 0.000015
-    set kinematic viscosity = 1
+    set kinematic viscosity = 0.000015
+    # set kinematic viscosity = 1
     set density             = 1.2041
   end
 end
@@ -55,7 +55,7 @@ subsection mesh
   set type                        = gmsh
   set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
   # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v1.msh
-  set initial refinement          = 2
+  set initial refinement          = 3
   set initial boundary refinement = 1
   set boundaries refined          = 0,3
 end
@@ -70,10 +70,10 @@ subsection mesh adaptation
   set error estimator          = kelly
   set frequency                = 100
   set max number elements      = 2000000
-  set fraction refinement      = 0.2
-  set fraction coarsening      = 0.1
-  set min refinement level     = 0
-  set max refinement level     = 6
+  set fraction refinement      = 0.1
+  set fraction coarsening      = 0.01
+  set min refinement level     = 3
+  set max refinement level     = 5
   set initial refinement steps = 0
 end
 
@@ -100,8 +100,8 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity degree = 2
-  set pressure degree = 2
+  set velocity degree = 1
+  set pressure degree = 1
 end
 
 #---------------------------------------------------
