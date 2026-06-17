@@ -13,7 +13,8 @@ set dimension = 2
 subsection simulation control
   set method                         = bdf2
   set output name                    = jow_2d_fluid_lab_specs_boxref_q2q2
-  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_q2q2/
+  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_q2q2/
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_q2q2/
   set output control                 = iteration
   set output frequency               = 100
   set subdvision                     = 2
@@ -52,7 +53,8 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v2.msh
+  # set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v2.msh
+  set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_2d_lab_specs_v2.msh
   set initial refinement          = 3
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
