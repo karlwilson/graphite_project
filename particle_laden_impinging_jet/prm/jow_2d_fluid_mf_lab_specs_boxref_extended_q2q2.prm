@@ -12,9 +12,9 @@ set dimension = 2
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_2d_fluid_lab_specs_boxref_q2q2_coarser
-  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_q2q2_coarser/
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_q2q2_coarser/
+  set output name                    = jow_2d_fluid_lab_specs_boxref_extended_q2q2
+  # set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_extended_q2q2/
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_2d_fluid_lab_specs_boxref_extended_q2q2/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
@@ -86,7 +86,7 @@ set number of refinement boxes = 1
     subsection mesh
       set type                    = dealii
       set grid type               = hyper_rectangle
-      set grid arguments          = -0.003, -0.1 : 0.05, 0.1 : false
+      set grid arguments          = -0.05, -0.1 : 0.05, 0.1 : false
       set initial refinement      = 0
       set scale                   = 1
     end
@@ -120,7 +120,7 @@ subsection restart
   set checkpoint = true
   set frequency  = 100
   set filename   = restart
-  set restart    = true
+  set restart    = false
 end
 
 #---------------------------------------------------
