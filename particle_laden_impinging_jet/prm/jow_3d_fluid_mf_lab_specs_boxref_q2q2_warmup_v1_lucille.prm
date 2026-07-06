@@ -12,8 +12,8 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_lab_specs_boxref_q2q2_local
-  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_lab_specs_boxref_q2q2_local/
+  set output name                    = jow_3d_fluid_mf_lab_specs_boxref_q2q2_warmup_v1_lucille
+  set output path                    = /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_boxref_q2q2_warmup_v1_lucille/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
@@ -52,7 +52,7 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
+  set file name                   = /data/charles/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
   set initial refinement          = 1
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
@@ -116,9 +116,9 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 25 
+  set frequency  = 50
   set filename   = restart
-  set restart    = true
+  set restart    = false
 end
 
 #---------------------------------------------------
@@ -196,9 +196,10 @@ subsection linear solver
     set mg enable hessians in jacobian        = false
     set mg coarse grid use fe q iso q1        = true
 
-    # Smoother
+    # MG smoother parameters
     set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
+    set mg smoother preconditioner type       = additive schwarz method
 
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10

@@ -12,8 +12,8 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_lab_specs_boxref_q2q2_local
-  set output path                    = /home/charles/work/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_lab_specs_boxref_q2q2_local/
+  set output name                    = jow_3d_fluid_mf_lab_specs_boxref_q2q2_lucille
+  set output path                    = /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_boxref_q2q2_lucille/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
@@ -52,7 +52,7 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /home/charles/work/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
+  set file name                   = /data/charles/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
   set initial refinement          = 1
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
@@ -116,7 +116,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 25 
+  set frequency  = 50
   set filename   = restart
   set restart    = true
 end
@@ -167,7 +167,7 @@ subsection non-linear solver
   subsection fluid dynamics
     set solver                = newton
     set verbosity             = verbose
-    set tolerance             = 1e-5
+    set tolerance             = 1e-4
     set max iterations        = 10
     set force rhs calculation = false
     set reuse preconditioner  = true
@@ -182,10 +182,10 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 400
+    set max iters                             = 1000
     set max krylov vectors                    = 200
-    set relative residual                     = 1e-4
-    set minimum residual                      = 1e-8
+    set relative residual                     = 1e-3
+    set minimum residual                      = 1e-7
     set enable hessians in jacobian           = true
     set enable hessians in residual           = true
 
