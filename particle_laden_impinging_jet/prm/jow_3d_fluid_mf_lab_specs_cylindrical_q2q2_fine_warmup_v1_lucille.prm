@@ -12,13 +12,13 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_mf_lab_specs_boxref_q2q2_fine_warmup_v1_lucille
-  set output path                    = /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_boxref_q2q2_fine_warmup_v1_lucille/
+  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_lucille
+  set output path                    = /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_lucille/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
   set log frequency                  = 1
-  set time step                      = 0.0001
+  set time step                      = 0.00001
   set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
@@ -52,10 +52,37 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /data/charles/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
+  set file name                   = /data/charles/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_cyl_v1.msh
   set initial refinement          = 2
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
+end
+
+#---------------------------------------------------
+# Manifolds
+#---------------------------------------------------
+
+# Make the cylindrical boundaries truly round. Lethe sets each boundary face's
+# manifold id to its boundary id, then attaches these CylindricalManifolds, so
+# refinement and the Q2 mapping follow the exact cylinder rather than the
+# faceted gmsh mesh. Both cylinders are concentric with the jet: axis through
+# the origin, pointing along +z (the jet direction).
+subsection manifolds
+  set number = 2
+  # Outer chamber wall (id 4): the main cylinder to round.
+  subsection manifold 0
+    set id                = 4
+    set type              = cylindrical
+    set point coordinates = 0, 0, 0
+    set direction vector  = 0, 0, 1
+  end
+  # Nozzle walls (id 3): inner bore + outer tube + rim, all concentric about z.
+  subsection manifold 1
+    set id                = 3
+    set type              = cylindrical
+    set point coordinates = 0, 0, 0
+    set direction vector  = 0, 0, 1
+  end
 end
 
 #---------------------------------------------------
