@@ -12,8 +12,8 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_mf_lab_specs_boxref_q1q1_fine_trillium
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_boxref_q1q1_fine_trillium/
+  set output name                    = jow_3d_fluid_mf_lab_specs_boxref_q2q2_fine_warmup_v1_trillium
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_boxref_q2q2_fine_warmup_v1_trillium/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
@@ -42,7 +42,7 @@ end
 
 subsection source term
   subsection fluid dynamics
-    set Function expression = 0;0;0;0
+    set enable = false
   end
 end
 
@@ -53,7 +53,7 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_v1.msh
-  set initial refinement          = 1
+  set initial refinement          = 2
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
 end
@@ -98,8 +98,8 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity degree = 1
-  set pressure degree = 1
+  set velocity degree = 2
+  set pressure degree = 2
 end
 
 #---------------------------------------------------
@@ -116,7 +116,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 2000
+  set frequency  = 500
   set filename   = restart
   set restart    = false
 end
@@ -138,7 +138,7 @@ subsection boundary conditions
         set Function expression = 0
     end
     subsection w
-        set Function expression = if(t<0.005, (600*t + 2), 5)
+        set Function expression = if(t<0.005, (180*t + 0.1), 1)
     end
   end
   subsection bc 1
@@ -151,7 +151,7 @@ subsection boundary conditions
         set Function expression = 0
     end
     subsection w
-        set Function expression = 0.1
+        set Function expression = 0.02
     end
   end
   subsection bc 2
@@ -205,9 +205,10 @@ subsection linear solver
     set mg enable hessians in jacobian        = false
     set mg coarse grid use fe q iso q1        = true
 
-    # Smoother
+    # MG smoother parameters
     set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
+    set mg smoother preconditioner type       = additive schwarz method
 
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
