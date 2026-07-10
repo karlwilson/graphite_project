@@ -12,13 +12,13 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_lucille
-  set output path                    = /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_lucille/
+  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_trillium
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_trillium/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
   set log frequency                  = 1
-  set time step                      = 0.00001
+  set time step                      = 0.0001
   set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
@@ -52,7 +52,7 @@ end
 
 subsection mesh
   set type                        = gmsh
-  set file name                   = /data/charles/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_cyl_v1.msh
+  set file name                   = /scratch/zouave/graphite_project/particle_laden_impinging_jet/meshes/jet_on_wall_3d_lab_specs_cyl_v1.msh
   set initial refinement          = 2
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
