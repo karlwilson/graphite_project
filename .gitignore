@@ -64,8 +64,9 @@
 # Lethe restart files
 restart.*
 
-# Slurm scripts, because cluster specific
-slurm_scripts/
+# Simulation outputs and checkpoints
+*/simulations/*/outputs/
+*/simulations/_archive/
 
 # Frames for animations
 frames/
