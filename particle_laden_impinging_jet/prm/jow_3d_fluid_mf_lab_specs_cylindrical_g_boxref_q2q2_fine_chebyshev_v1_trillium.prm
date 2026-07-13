@@ -12,8 +12,8 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_trillium
-  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_fine_warmup_v1_trillium/
+  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_v1_trillium
+  set output path                    = /scratch/zouave/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_v1_trillium.prm/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
@@ -42,7 +42,7 @@ end
 
 subsection source term
   subsection fluid dynamics
-    set enable = false
+    set Function expression = 0;-9.81;0;0
   end
 end
 
@@ -235,7 +235,7 @@ subsection linear solver
     # MG smoother parameters
     set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
-    set mg smoother preconditioner type       = additive schwarz method
+    set mg smoother preconditioner type       = chebyshev
 
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
