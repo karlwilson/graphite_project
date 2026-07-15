@@ -1,10 +1,10 @@
 #!/bin/bash
-#SBATCH --time=0-06:00
+#SBATCH --time=0-01:00
 #SBATCH --account=def-blaisbru
-#SBATCH --nodes=3
+#SBATCH --nodes=4
 #SBATCH --ntasks-per-node=192
 #SBATCH --cpus-per-task=1
-#SBATCH --mem=750G
+#SBATCH --mem=200G
 #SBATCH --mail-user=charles.wilson@etud.polymtl.ca
 #SBATCH --mail-type=ALL
 #SBATCH --job-name=jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_480_fir
