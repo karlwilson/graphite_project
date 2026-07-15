@@ -7,5 +7,5 @@
 
 source ~/.job_launch
 source ~/.lethe
-mpirun -np 128 lethe-fluid-matrix-free /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_480_fir/jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_480_fir.prm
+mpirun -np 128 lethe-fluid-matrix-free /data/charles/graphite_project/particle_laden_impinging_jet/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_480_lucille/jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_480_lucille.prm
 source ~/.job_stop
