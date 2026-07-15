@@ -12,13 +12,13 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_1440_fir
+  set output name                    = jow_3d_fluid_mf_lab_specs_cylindrical_boxref_q2q2_fine_chebyshev_Re_480_lucille
   set output path                    = ./outputs/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
   set log frequency                  = 1
-  set time step                      = 0.00003
+  set time step                      = 0.00001
   set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
@@ -42,7 +42,7 @@ end
 
 subsection source term
   subsection fluid dynamics
-    set Function expression = 0;-9.81;0;0
+    set enable = false
   end
 end
 
@@ -53,7 +53,7 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v1.msh
-  set initial refinement          = 2
+  set initial refinement          = 1
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
 end
@@ -175,7 +175,7 @@ subsection boundary conditions
         set Function expression = 0
     end
     subsection w
-        set Function expression = if(t<0.005, (540*t + 0.3), 3)
+        set Function expression = if(t<0.005, (180*t + 0.1), 1)
     end
   end
   subsection bc 1
@@ -188,7 +188,7 @@ subsection boundary conditions
         set Function expression = 0
     end
     subsection w
-        set Function expression = 0.03
+        set Function expression = 0.001
     end
   end
   subsection bc 2
@@ -245,7 +245,7 @@ subsection linear solver
     # MG smoother parameters
     set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
-    set mg smoother preconditioner type       = chebyshev
+    set mg smoother preconditioner type       = additive schwarz method
 
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10

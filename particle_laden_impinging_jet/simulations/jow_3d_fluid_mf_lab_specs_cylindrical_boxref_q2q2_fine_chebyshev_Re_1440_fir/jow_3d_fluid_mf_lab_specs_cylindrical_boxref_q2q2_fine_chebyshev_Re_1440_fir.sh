@@ -7,7 +7,7 @@
 #SBATCH --mem=750G
 #SBATCH --mail-user=charles.wilson@etud.polymtl.ca
 #SBATCH --mail-type=ALL
-#SBATCH --job-name=jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_960_fir
+#SBATCH --job-name=jow_3d_fluid_mf_lab_specs_cylindrical_boxref_q2q2_fine_chebyshev_Re_1440_fir
 
 export OMP_NUM_THREADS=1
 ulimit -s 8192
@@ -18,6 +18,6 @@ export PLIJ_PATH=$SCRATCH/graphite_project/particle_laden_impinging_jet
 source $HOME/.dealii
 
 # prm paths are relative to this directory
-cd $PLIJ_PATH/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_960_fir || exit 1
+cd $PLIJ_PATH/simulations/jow_3d_fluid_mf_lab_specs_cylindrical_boxref_q2q2_fine_chebyshev_Re_1440_fir || exit 1
 
-srun $HOME/lethe/inst/bin/lethe-fluid-matrix-free ./jow_3d_fluid_mf_lab_specs_cylindrical_g_boxref_q2q2_fine_chebyshev_Re_960_fir.prm
+srun $HOME/lethe/inst/bin/lethe-fluid-matrix-free ./jow_3d_fluid_mf_lab_specs_cylindrical_boxref_q2q2_fine_chebyshev_Re_1440_fir.prm
