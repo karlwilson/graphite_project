@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=charles-jow_3d_fluid_mf_lab_specs_cylindrical_q2q2_chebyshev_v1_lucille
+#SBATCH --job-name=charles-jow_3d_fluid_mf_lab_specs_cylindrical_boxref_q2q2_fine_chebyshev_Re_480_lucille
 #SBATCH --output=log.txt
 #SBATCH --ntasks=128
 #SBATCH --time=24:00:00
