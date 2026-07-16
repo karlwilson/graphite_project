@@ -53,7 +53,7 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v1.msh
-  set initial refinement          = 1
+  set initial refinement          = 2
   set initial boundary refinement = 0
   set boundaries refined          = 0,3
 end
