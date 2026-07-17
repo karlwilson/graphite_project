@@ -1,0 +1,268 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 The Lethe Authors
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception OR LGPL-2.1-or-later
+
+# Listing of Parameters
+#----------------------
+
+set dimension = 3
+
+#---------------------------------------------------
+# Simulation Control
+#---------------------------------------------------
+
+subsection simulation control
+  set method                         = bdf2
+  set output name                    = jow_3d_fluid_mf_lab_specs_cyl_v1_boxref_q2q2_fine_chebyshev_Re_480_lucille
+  set output path                    = ./outputs/
+  set output control                 = iteration
+  set output frequency               = 100
+  set subdivision                    = 2
+  set log frequency                  = 1
+  set time step                      = 0.00001
+  set time end                       = 1
+  set adapt time step to respect CFL = true
+  set max cfl                        = 1
+  set output boundaries              = true
+end
+
+#---------------------------------------------------
+# Physical Properties
+#---------------------------------------------------
+
+subsection physical properties
+  subsection fluid 0
+    set kinematic viscosity = 0.000015
+    set density             = 1.2041
+  end
+end
+
+#---------------------------------------------------
+# Source term
+#---------------------------------------------------
+
+subsection source term
+  subsection fluid dynamics
+    set enable = false
+  end
+end
+
+#---------------------------------------------------
+# Mesh
+#---------------------------------------------------
+
+subsection mesh
+  set type                        = gmsh
+  set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v1.msh
+  set initial refinement          = 2
+  set initial boundary refinement = 0
+  set boundaries refined          = 0,3
+end
+
+#---------------------------------------------------
+# Manifolds
+#---------------------------------------------------
+
+# Make the cylindrical boundaries truly round. Lethe sets each boundary face's
+# manifold id to its boundary id, then attaches these CylindricalManifolds, so
+# refinement and the Q2 mapping follow the exact cylinder rather than the
+# faceted gmsh mesh. Both cylinders are concentric with the jet: axis through
+# the origin, pointing along +z (the jet direction).
+subsection manifolds
+  set number = 2
+  # Outer chamber wall (id 4): the main cylinder to round.
+  subsection manifold 0
+    set id                = 4
+    set type              = cylindrical
+    set point coordinates = 0, 0, 0
+    set direction vector  = 0, 0, 1
+  end
+  # Nozzle walls (id 3): inner bore + outer tube + rim, all concentric about z.
+  subsection manifold 1
+    set id                = 3
+    set type              = cylindrical
+    set point coordinates = 0, 0, 0
+    set direction vector  = 0, 0, 1
+  end
+end
+
+#---------------------------------------------------
+# Mesh adaptation
+#---------------------------------------------------
+
+# subsection mesh adaptation
+#   set type                     = adaptive
+#   set variable                 = velocity
+#   set error estimator          = kelly
+#   set frequency                = 100
+#   set max number elements      = 2000000
+#   set fraction refinement      = 0.1
+#   set fraction coarsening      = 0.01
+#   set min refinement level     = 3
+#   set max refinement level     = 5
+#   set initial refinement steps = 0
+# end
+
+#---------------------------------------------------
+# Box Refinement
+#---------------------------------------------------
+subsection box refinement
+set number of refinement boxes = 2
+  subsection box 0
+    subsection mesh
+      set type                    = dealii
+      set grid type               = hyper_rectangle
+      set grid arguments          = -0.0072, -0.0072, -0.003 : 0.0072, 0.0072, 0.02 : false
+      set initial refinement      = 0
+      set scale                   = 1
+    end
+    set additional refinement = 1
+  end
+  subsection box 1
+    subsection mesh
+      set type                    = dealii
+      set grid type               = hyper_rectangle
+      set grid arguments          = -0.04, -0.04, 0.03 : 0.04, 0.04, 0.05 : false
+      set initial refinement      = 0
+      set scale                   = 1
+    end
+    set additional refinement = 1
+  end
+end
+
+
+#---------------------------------------------------
+# FEM
+#---------------------------------------------------
+
+subsection FEM
+  set velocity degree = 2
+  set pressure degree = 2
+end
+
+#---------------------------------------------------
+# Timer
+#---------------------------------------------------
+
+subsection timer
+  set type = iteration
+end
+
+#---------------------------------------------------
+# Restart
+#---------------------------------------------------
+
+subsection restart
+  set checkpoint = true
+  set frequency  = 100
+  set filename   = restart
+  set restart    = false
+end
+
+#---------------------------------------------------
+# Boundary Conditions
+#---------------------------------------------------
+
+subsection boundary conditions
+  set time dependent    = true
+  set number            = 5
+  subsection bc 0
+    set id      = 0
+    set type    = function
+    subsection u
+        set Function expression = 0
+    end
+    subsection v
+        set Function expression = 0
+    end
+    subsection w
+        set Function expression = if(t<0.005, (180*t + 0.1), 1)
+    end
+  end
+  subsection bc 1
+    set id      = 1
+    set type    = function
+    subsection u
+        set Function expression = 0
+    end
+    subsection v
+        set Function expression = 0
+    end
+    subsection w
+        set Function expression = 0.001
+    end
+  end
+  subsection bc 2
+    set id      = 2
+    set type    = noslip
+  end
+  subsection bc 3
+    set id      = 3
+    set type    = slip
+  end
+  subsection bc 4
+    set id      = 4
+    set type    = outlet
+  end
+end
+
+#---------------------------------------------------
+# Non-Linear Solver Control
+#---------------------------------------------------
+
+subsection non-linear solver
+  subsection fluid dynamics
+    set solver                = newton
+    set verbosity             = verbose
+    set tolerance             = 1e-5
+    set max iterations        = 10
+    set force rhs calculation = false
+    set reuse preconditioner  = true
+  end
+end
+
+#---------------------------------------------------
+# Linear Solver Control
+#---------------------------------------------------
+
+subsection linear solver
+  subsection fluid dynamics
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 400
+    set max krylov vectors                    = 200
+    set relative residual                     = 1e-4
+    set minimum residual                      = 1e-8
+    set enable hessians in jacobian           = true
+    set enable hessians in residual           = true
+
+    set preconditioner                        = gcmg
+
+    # MG parameters
+    set mg verbosity                          = quiet
+    set mg enable hessians in jacobian        = false
+    set mg coarse grid use fe q iso q1        = true
+
+    # MG smoother parameters
+    set mg smoother iterations                = 10
+    set mg smoother eig estimation            = true
+    set mg smoother preconditioner type       = additive schwarz method
+
+    # Eigenvalue estimation parameters
+    set eig estimation smoothing range        = 10
+    set eig estimation cg n iterations        = 20
+    set eig estimation verbosity              = quiet
+
+    # Coarse-grid solver
+    set mg coarse grid solver                 = amg
+  end
+end
+
+#---------------------------------------------------
+# Post-Processing
+#---------------------------------------------------
+
+subsection post-processing
+  set calculate average velocities      = true
+  set initial time for average velocity = 0.5
+end
+
