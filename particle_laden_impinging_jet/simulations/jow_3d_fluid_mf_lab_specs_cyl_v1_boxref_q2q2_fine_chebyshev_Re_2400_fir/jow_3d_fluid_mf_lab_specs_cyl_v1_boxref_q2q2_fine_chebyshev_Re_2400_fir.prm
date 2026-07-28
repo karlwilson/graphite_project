@@ -155,7 +155,7 @@ subsection restart
   set checkpoint = true
   set frequency  = 100
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------
