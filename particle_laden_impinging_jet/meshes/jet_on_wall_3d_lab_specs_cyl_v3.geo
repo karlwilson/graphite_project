@@ -34,11 +34,27 @@ Rd2 = Rc2 / Sqrt(2);      // extended diagonal coordinate
 nb   = 3;      // points per 45deg arc  (circumferential; also inner-quad edges)
 nbr  = 3;      // points across a bore cap (radial): 2 cell layers to nozzle wall
 ntc  = 1;      // points across the nozzle wall thickness
+// Radial grading is set so that dr tracks the circumferential cell size, which
+// grows like r. With nb = 3 the chord per cell is 0.390 r, so the "isotropic"
+// progression is 1.39 per cell; over Rw->Rc only 7 cells are available, so the
+// best achievable is exp = 1.55 (in-plane aspect 1.41 instead of 2.45 at 1.35).
+// Rc->Rc2 needs only ~2 cells at that rate, hence nhp2 = 3 with exp2 = 1.41
+// (in-plane 1.33 instead of 3.12, and 4480 fewer hexes than nhp2 = 5).
+// NB: this does not move the global max aspect ratio (43.7 chamber / 87.4
+// extended) - that one is the circumferential chord over dz, and no radial
+// parameter enters it. Raising the counts instead (nhp=16/nhp2=6 was tried)
+// leaves both maxima untouched, costs +89% hexes, and pushes the in-plane
+// ratios the wrong way (1.41 -> 2.57 and 1.33 -> 3.35) because dr then falls
+// below the chord; at nhp ~ 18 dr drops under dz and the maxima start rising.
 nhp  = 8;      // points across the chamber annulus (radial)
-exp  = 1.35;   // chamber annulus radial grading (finer near the jet)
-nhp2 = 5;      // points across the extended annulus (radial, coarser)
-exp2 = 1.0;    // extended annulus radial grading (uniform)
-zp   = 7;      // z cells in the projection zone (forward, +dp)
+exp  = 1.55;   // chamber annulus radial grading (finer near the jet)
+nhp2 = 3;      // points across the extended annulus (radial, coarser)
+exp2 = 1.41;   // extended annulus radial grading
+// z counts set for isotropic central (pinwheel) bore cells: with nb = 3 their
+// in-plane edges are 0.850-0.948 mm (sqrt(area) 0.879 mm). Since dp/dc = 2/3,
+// zp = 56 / zc = 84 give the same dz = 0.893 mm in both zones, so the central
+// cells of the nozzle and of the projection zone have aspect ratios 0.91-1.06.
+zp   = 7;     // z cells in the projection zone (forward, +dp)
 zc   = 10;     // z cells in the charging zone   (backward, -dc)
 
 // ---------------------------------------------------------------- points (z = 0)
