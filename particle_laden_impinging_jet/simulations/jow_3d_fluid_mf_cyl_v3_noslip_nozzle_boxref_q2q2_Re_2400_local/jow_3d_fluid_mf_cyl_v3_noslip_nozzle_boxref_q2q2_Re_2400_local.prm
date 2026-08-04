@@ -12,14 +12,16 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_fluid_mf_cyl_v3_noslip_nozzle_boxref_q2q2_Re_2400_fir
+  set output name                    = jow_3d_fluid_mf_cyl_v3_noslip_nozzle_boxref_q2q2_Re_2400_local
   set output path                    = ./outputs/
   set output control                 = iteration
   set output frequency               = 100
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
-  set time end                       = 1
+  set end control                    = iteration
+  set iteration end                  = 100
+  # set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
   set output boundaries              = true
@@ -53,9 +55,9 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v3.msh
-  set initial refinement          = 2
-  set initial boundary refinement = 0
-  set boundaries refined          = 0,3
+  set initial refinement          = 0
+  set initial boundary refinement = 2
+  set boundaries refined          = 2
 end
 
 #---------------------------------------------------
@@ -111,7 +113,7 @@ set number of refinement boxes = 2
     subsection mesh
       set type                    = dealii
       set grid type               = hyper_rectangle
-      set grid arguments          = -0.0072, -0.0072, -0.003 : 0.0072, 0.0072, 0.02 : false
+      set grid arguments          = -0.0072, -0.0072, -0.003 : 0.0072, 0.0072, 0.03 : false
       set initial refinement      = 0
       set scale                   = 1
     end
@@ -121,7 +123,7 @@ set number of refinement boxes = 2
     subsection mesh
       set type                    = dealii
       set grid type               = hyper_rectangle
-      set grid arguments          = -0.04, -0.04, 0.03 : 0.04, 0.04, 0.05 : false
+      set grid arguments          = -0.04, -0.04, 0.04 : 0.04, 0.04, 0.05 : false
       set initial refinement      = 0
       set scale                   = 1
     end
@@ -135,8 +137,8 @@ end
 #---------------------------------------------------
 
 subsection FEM
-  set velocity degree = 2
-  set pressure degree = 2
+  set velocity degree = 1
+  set pressure degree = 1
 end
 
 #---------------------------------------------------
@@ -197,7 +199,7 @@ subsection boundary conditions
   end
   subsection bc 3
     set id      = 3
-    set type    = slip
+    set type    = noslip
   end
   subsection bc 4
     set id      = 4
@@ -245,7 +247,7 @@ subsection linear solver
     # MG smoother parameters
     set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
-    set mg smoother preconditioner type       = chebyshev
+    set mg smoother preconditioner type       = additive schwarz method
 
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
@@ -262,6 +264,13 @@ end
 #---------------------------------------------------
 
 subsection post-processing
+  set verbosity                         = verbose
+  set calculation frequency             = 1
+  set output frequency                  = 1
+
+  set calculate flow rate               = true
+  set flow rate name                    = flow_rate
+
   set calculate average velocities      = true
   set initial time for average velocity = 0.5
 end
