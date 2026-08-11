@@ -19,9 +19,9 @@ subsection simulation control
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
-  set end control                    = iteration
-  set iteration end                  = 100
-  # set time end                       = 1
+  set end control                    = time
+  # set iteration end                  = 100
+  set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
   set output boundaries              = true
@@ -123,7 +123,7 @@ set number of refinement boxes = 2
     subsection mesh
       set type                    = dealii
       set grid type               = hyper_rectangle
-      set grid arguments          = -0.04, -0.04, 0.04 : 0.04, 0.04, 0.05 : false
+      set grid arguments          = -0.04, -0.04, 0.03 : 0.04, 0.04, 0.05 : false
       set initial refinement      = 0
       set scale                   = 1
     end
@@ -155,9 +155,9 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 25
+  set frequency  = 100
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------
@@ -247,7 +247,7 @@ subsection linear solver
     # MG smoother parameters
     set mg smoother iterations                = 10
     set mg smoother eig estimation            = true
-    set mg smoother preconditioner type       = additive schwarz method
+    set mg smoother preconditioner type       = chebyshev
 
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
