@@ -178,7 +178,7 @@ end
 subsection void fraction
   set mode                          = qcm
   set read dem                      = false
-  set qcm smoothing length          = 6.e-4
+  set qcm smoothing length          = 0
   set qcm sphere equal cell volume  = false
   set qcm filter type               = spherical
   set quadrature rule               = gauss
