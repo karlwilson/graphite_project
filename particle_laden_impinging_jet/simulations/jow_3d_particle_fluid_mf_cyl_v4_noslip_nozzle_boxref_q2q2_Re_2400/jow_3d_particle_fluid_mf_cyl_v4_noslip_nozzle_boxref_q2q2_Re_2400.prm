@@ -1,0 +1,443 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 The Lethe Authors
+# SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception OR LGPL-2.1-or-later
+
+# Listing of Parameters
+#----------------------
+
+set dimension = 3
+
+#---------------------------------------------------
+# Simulation Control
+#---------------------------------------------------
+
+subsection simulation control
+  set method                         = bdf2
+  set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_boxref_q2q2_Re_2400
+  set output path                    = ./outputs/
+  set output control                 = iteration
+  set output frequency               = 100
+  set subdivision                    = 2
+  set log frequency                  = 1
+  set time step                      = 0.00001
+  set end control                    = iteration
+  set iteration end                  = 100
+  # set time end                       = 1
+  set adapt time step to respect CFL = true
+  set max cfl                        = 1
+  set output boundaries              = true
+end
+
+#---------------------------------------------------
+# Physical Properties
+#---------------------------------------------------
+
+subsection physical properties
+  subsection fluid 0
+    set kinematic viscosity = 0.000015
+    set density             = 1.2041
+  end
+end
+
+#---------------------------------------------------
+# Source term
+#---------------------------------------------------
+
+subsection source term
+  subsection fluid dynamics
+    set enable = false
+  end
+end
+
+#---------------------------------------------------
+# Mesh
+#---------------------------------------------------
+
+subsection mesh
+  set type                        = gmsh
+  set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v4.msh
+  set initial refinement          = 1
+  set initial boundary refinement = 0
+  set boundaries refined          = 2
+end
+
+#---------------------------------------------------
+# Manifolds
+#---------------------------------------------------
+
+# Make the cylindrical boundaries truly round. Lethe sets each boundary face's
+# manifold id to its boundary id, then attaches these CylindricalManifolds, so
+# refinement and the Q2 mapping follow the exact cylinder rather than the
+# faceted gmsh mesh. Both cylinders are concentric with the jet: axis through
+# the origin, pointing along +z (the jet direction).
+subsection manifolds
+  set number = 2
+  # Outer chamber wall (id 4): the main cylinder to round.
+  subsection manifold 0
+    set id                = 4
+    set type              = cylindrical
+    set point coordinates = 0, 0, 0
+    set direction vector  = 0, 0, 1
+  end
+  # Nozzle walls (id 3): inner bore + outer tube + rim, all concentric about z.
+  subsection manifold 1
+    set id                = 3
+    set type              = cylindrical
+    set point coordinates = 0, 0, 0
+    set direction vector  = 0, 0, 1
+  end
+end
+
+#---------------------------------------------------
+# Mesh adaptation
+#---------------------------------------------------
+
+# subsection mesh adaptation
+#   set type                     = adaptive
+#   set variable                 = velocity
+#   set error estimator          = kelly
+#   set frequency                = 100
+#   set max number elements      = 2000000
+#   set fraction refinement      = 0.1
+#   set fraction coarsening      = 0.01
+#   set min refinement level     = 3
+#   set max refinement level     = 5
+#   set initial refinement steps = 0
+# end
+
+#---------------------------------------------------
+# Box Refinement
+#---------------------------------------------------
+# subsection box refinement
+# set number of refinement boxes = 2
+#   subsection box 0
+#     subsection mesh
+#       set type                    = dealii
+#       set grid type               = hyper_rectangle
+#       set grid arguments          = -0.0072, -0.0072, -0.003 : 0.0072, 0.0072, 0.03 : false
+#       set initial refinement      = 0
+#       set scale                   = 1
+#     end
+#     set additional refinement = 1
+#   end
+#   subsection box 1
+#     subsection mesh
+#       set type                    = dealii
+#       set grid type               = hyper_rectangle
+#       set grid arguments          = -0.04, -0.04, 0.04 : 0.04, 0.04, 0.05 : false
+#       set initial refinement      = 0
+#       set scale                   = 1
+#     end
+#     set additional refinement = 1
+#   end
+# end
+
+
+#---------------------------------------------------
+# FEM
+#---------------------------------------------------
+
+subsection FEM
+  set velocity degree = 2
+  set pressure degree = 2
+end
+
+
+#---------------------------------------------------
+# CFD-DEM
+#---------------------------------------------------
+
+subsection cfd-dem
+  set grad div                      = true 
+  set void fraction time derivative = true
+  set interpolated void fraction    = true
+  set vans model                    = modelA
+  set drag force                    = true
+  set drag coupling                 = semi-implicit
+  set drag model                    = difelice
+  set saffman lift force            = false
+  set magnus lift force             = false
+  set rotational viscous torque     = false
+  set vortical viscous torque       = false
+  set buoyancy force                = true
+  set shear force                   = true
+  set pressure force                = true
+  set project particle force        = false
+  set dem iteration control         = fraction of rayleigh time
+  set fraction rayleigh time        = 0.1
+  set coupling frequency            = 10
+  set implicit stabilization        = true
+  set grad-div length scale         = 1
+  set particle statistics           = true
+end
+
+
+#---------------------------------------------------
+# Void fraction
+#---------------------------------------------------
+
+subsection void fraction
+  set mode                          = qcm
+  set read dem                      = false
+  set l2 smoothing length           = 0
+  set qcm smoothing length          = 6.e-4
+  set qcm sphere equal cell volume  = false
+  set qcm filter type               = spherical
+  set quadrature rule               = gauss
+  set n quadrature points           = 0   # default value of 0 means n = void_fraction_degree + 1 for Gauss quadrature
+  set project particle velocity     = true
+end
+
+
+#---------------------------------------------------
+# Model parameters
+#---------------------------------------------------
+
+subsection model parameters
+  subsection contact detection
+    set contact detection method = dynamic
+    set neighborhood threshold   = 1.3
+    set frequency                = 1    # can be increased between 2-5 when using >16 cores, reduces MPI communication
+  end
+  subsection load balancing
+    set load balance method      = dynamic
+    set dynamic check frequency  = 1000
+    set threshold                = 0.5
+  end
+  set particle particle contact force method      = hertz_mindlin_limit_overlap
+  set particle wall contact force method          = nonlinear
+  set dmt cut-off threshold                       = 0.1
+  set integration method                          = velocity_verlet
+  set rolling resistance torque method            = constant
+  set solver type                                 = dem
+end
+
+
+#---------------------------------------------------
+# Insertion Info
+#---------------------------------------------------
+
+subsection insertion info
+  set insertion method                                = volume
+  set insertion frequency                             = 1000000000
+  set inserted number of particles at each time step  = 100000
+  set insertion distance threshold                    = 1.5
+  subsection insertion acceptance function
+    set Function constants = cyl_r = 0.0036, z_min = -0.073, z_max = -0.0375
+    set Function expression = if(z > z_min, if(z < z_max, if((x^2 + y^2) < cyl_r^2, 1, 0), 0), 0)
+  end
+  set insertion box points coordinates                = -0.0036, -0.0036, -0.073: 0.0036, 0.0036, -0.0375  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
+  set insertion direction sequence                    = 0, 1, 2
+  set initial velocity                                = 0.0, 0.0, 0.0
+  set initial angular velocity                        = 0.0, 0.0, 0.0
+  set insertion maximum offset                        = 0.2
+  set insertion prn seed                              = 42
+end
+
+
+#---------------------------------------------------
+# Lagrangian Physical properties
+#---------------------------------------------------
+
+subsection lagrangian physical properties
+  set g                                   = 0.0, -9.8, 0.0
+  set number of particle types            = 1
+  subsection particle type 0    # PEG 3350
+    set size distribution type            = uniform
+    set diameter                          = 100.e-6
+    set number of particles               = 100000
+    set density particles                 = 1092.6  
+    set young modulus particles           = 1.e8
+    set real young modulus particles      = 5.e8
+    set poisson ratio particles           = 0.4
+    set restitution coefficient particles = 0.4
+    set friction coefficient particles    = 0.45
+    set rolling friction particles        = 0.1
+    set rolling viscous damping particles = 0.1
+    set surface energy particles          = 0.01
+    set Hamaker constant particles        = 4.e-19
+    set microhardness particles           = 100.e6
+    set surface roughness particles       = 1.e-9
+  end
+  set young modulus wall                = 1.e6
+  set poisson ratio wall                = 0.3
+  set restitution coefficient wall      = 0.5
+  set friction coefficient wall         = 0.3
+  set rolling friction wall             = 0.1
+  set rolling viscous damping wall      = 0.1
+  set surface energy wall               = 0.
+  set Hamaker constant wall             = 4.e-19
+  set microhardness wall                = 1.e9
+  set surface roughness wall            = 1.e-10
+  set dynamic viscosity gas             = 18.03e-6
+end
+
+
+#---------------------------------------------------
+# Timer
+#---------------------------------------------------
+
+subsection timer
+  set type = iteration
+end
+
+#---------------------------------------------------
+# Restart
+#---------------------------------------------------
+
+subsection restart
+  set checkpoint = true
+  set frequency  = 25
+  set filename   = restart
+  set restart    = false
+end
+
+#---------------------------------------------------
+# Boundary Conditions
+#---------------------------------------------------
+
+subsection boundary conditions
+  set time dependent    = true
+  set number            = 5
+  subsection bc 0
+    set id      = 0
+    set type    = function
+    subsection u
+        set Function expression = 0
+    end
+    subsection v
+        set Function expression = 0
+    end
+    subsection w
+        set Function expression = if(t<0.005, (900*t + 0.5), 5)
+    end
+  end
+  subsection bc 1
+    set id      = 1
+    set type    = function
+    subsection u
+        set Function expression = 0
+    end
+    subsection v
+        set Function expression = 0
+    end
+    subsection w
+        set Function expression = 0.05
+    end
+  end
+  subsection bc 2
+    set id      = 2
+    set type    = noslip
+  end
+  subsection bc 3
+    set id      = 3
+    set type    = noslip
+  end
+  subsection bc 4
+    set id      = 4
+    set type    = outlet
+  end
+end
+
+
+#---------------------------------------------------
+# DEM Boundary Conditions
+#---------------------------------------------------
+
+subsection DEM boundary conditions
+  set number of boundary conditions = 5
+  subsection boundary condition 0
+    set boundary id = 0
+    set type        = fixed_wall
+  end
+  subsection boundary condition 1
+    set boundary id = 1
+    set type        = outlet
+  end
+  subsection boundary condition 2
+    set boundary id = 2
+    set type        = fixed_wall
+  end
+  subsection boundary condition 3
+    set boundary id = 3
+    set type        = fixed_wall
+  end
+  subsection boundary condition 4
+    set boundary id = 4
+    set type        = outlet
+  end
+end
+
+
+#---------------------------------------------------
+# Non-Linear Solver Control
+#---------------------------------------------------
+
+subsection non-linear solver
+  subsection fluid dynamics
+    set solver                = newton
+    set verbosity             = verbose
+    set tolerance             = 1e-5
+    set max iterations        = 10
+    set force rhs calculation = false
+    set reuse preconditioner  = true
+  end
+end
+
+#---------------------------------------------------
+# Linear Solver Control
+#---------------------------------------------------
+
+subsection linear solver
+  subsection fluid dynamics
+    set verbosity                             = verbose
+    set method                                = gmres
+    set max iters                             = 400
+    set max krylov vectors                    = 200
+    set relative residual                     = 1e-4
+    set minimum residual                      = 1e-8
+    set enable hessians in jacobian           = true
+    set enable hessians in residual           = true
+
+    set preconditioner                        = gcmg
+
+    # MG parameters
+    set mg verbosity                          = quiet
+    set mg enable hessians in jacobian        = false
+    set mg coarse grid use fe q iso q1        = true
+
+    # MG smoother parameters
+    set mg smoother iterations                = 10
+    set mg smoother eig estimation            = true
+    set mg smoother preconditioner type       = additive schwarz method
+
+    # Eigenvalue estimation parameters
+    set eig estimation smoothing range        = 10
+    set eig estimation cg n iterations        = 20
+    set eig estimation verbosity              = quiet
+
+    # Coarse-grid solver
+    set mg coarse grid solver                 = amg
+  end
+end
+
+#---------------------------------------------------
+# Post-Processing
+#---------------------------------------------------
+
+subsection post-processing
+  set verbosity                         = verbose
+  set calculation frequency             = 10
+  set output frequency                  = 10
+  set calculate flow rate               = true
+  set flow rate name                    = flow_rate
+  set calculate average velocities      = true
+  set initial time for average velocity = 0.5
+  subsection particle wall collision statistics
+    set enable particle wall collision statistics = true
+    set collision statistics file                 = collision_statistics.csv
+    set verbosity                                 = verbose
+    set log collisions with all walls             = false
+    set wall boundary ids                         = 2
+  end
+end
+
