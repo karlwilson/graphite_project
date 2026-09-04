@@ -161,7 +161,7 @@ subsection cfd-dem
   set buoyancy force                = true
   set shear force                   = true
   set pressure force                = true
-  set project particle force        = false
+  set project particle forces       = false
   set dem iteration control         = fraction of rayleigh time
   set fraction rayleigh time        = 0.1
   set coupling frequency            = 10
@@ -178,13 +178,12 @@ end
 subsection void fraction
   set mode                          = qcm
   set read dem                      = false
-  set l2 smoothing length           = 0
   set qcm smoothing length          = 6.e-4
   set qcm sphere equal cell volume  = false
   set qcm filter type               = spherical
   set quadrature rule               = gauss
   set n quadrature points           = 0   # default value of 0 means n = void_fraction_degree + 1 for Gauss quadrature
-  set project particle velocity     = true
+  set project particle velocity     = false
 end
 
 
@@ -254,7 +253,7 @@ subsection lagrangian physical properties
     set rolling friction particles        = 0.1
     set rolling viscous damping particles = 0.1
     set surface energy particles          = 0.01
-    set Hamaker constant particles        = 4.e-19
+    set hamaker constant particles        = 4.e-19
     set microhardness particles           = 100.e6
     set surface roughness particles       = 1.e-9
   end
@@ -265,7 +264,7 @@ subsection lagrangian physical properties
   set rolling friction wall             = 0.1
   set rolling viscous damping wall      = 0.1
   set surface energy wall               = 0.
-  set Hamaker constant wall             = 4.e-19
+  set hamaker constant wall             = 4.e-19
   set microhardness wall                = 1.e9
   set surface roughness wall            = 1.e-10
   set dynamic viscosity gas             = 18.03e-6
