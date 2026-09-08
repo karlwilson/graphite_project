@@ -15,13 +15,13 @@ subsection simulation control
   set output name                    = jow_3d_particle_fluid_cyl_v4_noslip_nozzle_boxref_q2q2_Re_2400
   set output path                    = ./outputs/
   set output control                 = iteration
-  set output frequency               = 100
+  set output frequency               = 50
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
-  set end control                    = iteration
-  set iteration end                  = 100
-  # set time end                       = 1
+  set end control                    = time
+  # set iteration end                  = 100
+  set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
   set output boundaries              = true
@@ -163,9 +163,9 @@ subsection cfd-dem
   set project particle forces       = false
   set dem iteration control         = fraction of rayleigh time
   set fraction rayleigh time        = 0.1
-  set coupling frequency            = 10
+  # set coupling frequency            = 10
   set implicit stabilization        = true
-  set grad-div length scale         = 1
+  set grad-div length scale         = 0.0072
   set particle statistics           = true
 end
 
@@ -194,7 +194,7 @@ subsection model parameters
   subsection contact detection
     set contact detection method = dynamic
     set neighborhood threshold   = 1.3
-    set frequency                = 1    # can be increased between 2-5 when using >16 cores, reduces MPI communication
+    set frequency                = 2    # can be increased between 2-5 when using >16 cores, reduces MPI communication
   end
   subsection load balancing
     set load balance method      = dynamic
@@ -217,15 +217,15 @@ end
 subsection insertion info
   set insertion method                                = volume
   set insertion frequency                             = 1000000000
-  set inserted number of particles at each time step  = 1000
+  set inserted number of particles at each time step  = 50000
   set insertion distance threshold                    = 1.5
   subsection insertion acceptance function
-    set Function constants = cyl_r = 0.0036, z_min = -0.073, z_max = -0.0375
+    set Function constants = cyl_r = 0.0033, z_min = -0.073, z_max = -0.0375
     set Function expression = if(z > z_min, if(z < z_max, if((x^2 + y^2) < cyl_r^2, 1, 0), 0), 0)
   end
-  set insertion box points coordinates                = -0.0036, -0.0036, -0.073: 0.0036, 0.0036, -0.0375  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
+  set insertion box points coordinates                = -0.0036, -0.0036, -0.05: 0.0036, 0.0036, -0.02  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
   set insertion direction sequence                    = 0, 1, 2
-  set initial velocity                                = 0.0, 0.0, 0.5
+  set initial velocity                                = 0.0, 0.0, 0.1
   set initial angular velocity                        = 0.0, 0.0, 0.0
   set insertion maximum offset                        = 0.2
   set insertion prn seed                              = 42
@@ -242,7 +242,7 @@ subsection lagrangian physical properties
   subsection particle type 0    # PEG 3350
     set size distribution type            = uniform
     set diameter                          = 100.e-6
-    set number of particles               = 1000
+    set number of particles               = 50000
     set density particles                 = 1092.6  
     set young modulus particles           = 1.e8
     set real young modulus particles      = 5.e8
@@ -284,7 +284,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 25
+  set frequency  = 100
   set filename   = restart
   set restart    = false
 end
@@ -306,7 +306,7 @@ subsection boundary conditions
         set Function expression = 0
     end
     subsection w
-        set Function expression = if(t<0.005, (900*t + 0.5), 5)
+        set Function expression = if(t<0.005, (180*t + 0.1), 1)
     end
   end
   subsection bc 1
@@ -372,12 +372,13 @@ end
 
 subsection non-linear solver
   subsection fluid dynamics
-    set solver                = newton
+    set solver                = inexact_newton
     set verbosity             = verbose
     set tolerance             = 1e-5
+    set reuse matrix          = true
     set max iterations        = 10
     set force rhs calculation = false
-    set reuse preconditioner  = true
+    set reuse preconditioner  = false
   end
 end
 
@@ -389,19 +390,25 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 400
+    set max iters                             = 800
     set max krylov vectors                    = 200
     set relative residual                     = 1e-4
-    set minimum residual                      = 1e-8
-    set enable hessians in jacobian           = true
-    set enable hessians in residual           = true
+    set minimum residual                      = 1e-10
+    set enable hessians in jacobian           = false
+    set enable hessians in residual           = false
 
     set preconditioner                        = ilu
 
     # ILU parameters
-    set ilu preconditioner fill               = 0
+    set ilu preconditioner fill               = 1
     set ilu preconditioner absolute tolerance = 1e-12
     set ilu preconditioner relative tolerance = 1.00
+  end
+  subsection void fraction
+    set verbosity                             = verbose
+    set method                                = gmres
+    set relative residual                     = 1e-15
+    set minimum residual                      = 1e-15
   end
 end
 
@@ -412,7 +419,7 @@ end
 subsection post-processing
   set verbosity                         = verbose
   set calculation frequency             = 10
-  set output frequency                  = 10
+  set output frequency                  = 50
   set calculate flow rate               = true
   set flow rate name                    = flow_rate
   set calculate average velocities      = true

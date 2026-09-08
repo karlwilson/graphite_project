@@ -1,7 +1,7 @@
 #!/bin/bash
-#SBATCH --time=0-06:00
+#SBATCH --time=0-12:00
 #SBATCH --account=rrg-blaisbru
-#SBATCH --nodes=4
+#SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
 #SBATCH --mail-user=charles.wilson@etud.polymtl.ca
 #SBATCH --mail-type=ALL
