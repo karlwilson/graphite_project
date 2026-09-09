@@ -378,7 +378,7 @@ subsection non-linear solver
     set reuse matrix          = true
     set max iterations        = 10
     set force rhs calculation = false
-    set reuse preconditioner  = false
+    set reuse preconditioner  = true
   end
 end
 
@@ -397,12 +397,17 @@ subsection linear solver
     set enable hessians in jacobian           = false
     set enable hessians in residual           = false
 
-    set preconditioner                        = ilu
+    set preconditioner                        = amg
 
-    # ILU parameters
-    set ilu preconditioner fill               = 1
-    set ilu preconditioner absolute tolerance = 1e-12
-    set ilu preconditioner relative tolerance = 1.00
+    # AMG parameters
+    set amg preconditioner ilu fill               = 1
+    set amg preconditioner ilu absolute tolerance = 1e-10
+    set amg preconditioner ilu relative tolerance = 1.00
+    set amg aggregation threshod                  = 1e-14
+    set amg n cycles                              = 1
+    set amg w cycles                              = false
+    set amg smoother sweeps                       = 2
+    set amg smoother overlap                      = 1
   end
   subsection void fraction
     set verbosity                             = verbose
