@@ -1,11 +1,13 @@
 #!/bin/bash
 #SBATCH --time=0-12:00
 #SBATCH --account=rrg-blaisbru
-#SBATCH --nodes=1
+#SBATCH --nodes=2
+#SBATCH --ntasks=192
+#SBATCH --mem-per-cpu=10G
 #SBATCH --cpus-per-task=1
 #SBATCH --mail-user=charles.wilson@etud.polymtl.ca
 #SBATCH --mail-type=ALL
-#SBATCH --job-name=jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_2400
+#SBATCH --job-name=fluid_warmup_jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_2400
 
 export OMP_NUM_THREADS=1
 ulimit -s 8192

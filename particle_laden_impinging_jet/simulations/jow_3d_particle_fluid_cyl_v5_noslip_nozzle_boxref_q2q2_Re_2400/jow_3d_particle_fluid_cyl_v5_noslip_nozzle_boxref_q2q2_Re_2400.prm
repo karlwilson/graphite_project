@@ -21,7 +21,7 @@ subsection simulation control
   set time step                      = 0.00001
   set end control                    = time
   # set iteration end                  = 100
-  set time end                       = 1
+  set time end                       = 0.2
   set adapt time step to respect CFL = true
   set max cfl                        = 1
   set output boundaries              = true
@@ -217,7 +217,7 @@ end
 subsection insertion info
   set insertion method                                = volume
   set insertion frequency                             = 1000000000
-  set inserted number of particles at each time step  = 100000
+  set inserted number of particles at each time step  = 0
   set insertion distance threshold                    = 1.5
   subsection insertion acceptance function
     set Function constants = cyl_r = 0.0033, z_min = -0.073, z_max = -0.0375
@@ -242,7 +242,7 @@ subsection lagrangian physical properties
   subsection particle type 0    # PEG 3350
     set size distribution type            = uniform
     set diameter                          = 100.e-6
-    set number of particles               = 100000
+    set number of particles               = 0
     set density particles                 = 1092.6  
     set young modulus particles           = 1.e8
     set real young modulus particles      = 5.e8
@@ -284,7 +284,7 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 100
+  set frequency  = 25
   set filename   = restart
   set restart    = false
 end
@@ -376,6 +376,7 @@ subsection non-linear solver
     set verbosity             = verbose
     set tolerance             = 1e-5
     set reuse matrix          = true
+    set matrix tolerance      = 0.5
     set max iterations        = 10
     set force rhs calculation = false
     set reuse preconditioner  = true
@@ -400,14 +401,14 @@ subsection linear solver
     set preconditioner                        = amg
 
     # AMG parameters
-    set amg preconditioner ilu fill               = 1
+    set amg preconditioner ilu fill               = 0
     set amg preconditioner ilu absolute tolerance = 1e-10
     set amg preconditioner ilu relative tolerance = 1.00
-    set amg aggregation threshold                 = 1e-14
+    set amg aggregation threshold                 = 1e-2
     set amg n cycles                              = 1
     set amg w cycles                              = false
     set amg smoother sweeps                       = 2
-    set amg smoother overlap                      = 1
+    set amg smoother overlap                      = 0
   end
   subsection void fraction
     set verbosity                             = verbose
