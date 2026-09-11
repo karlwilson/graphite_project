@@ -3,6 +3,8 @@
 #SBATCH --account=rrg-blaisbru
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=1
+#SBATCH --ntasks=192
+#SBATCH --mem-per-cpu=1G
 #SBATCH --mail-user=charles.wilson@etud.polymtl.ca
 #SBATCH --mail-type=ALL
 #SBATCH --job-name=jow_3d_particle_fluid_cyl_v4_noslip_nozzle_boxref_q2q2_Re_2400
