@@ -2,12 +2,11 @@
 #SBATCH --time=0-12:00
 #SBATCH --account=rrg-blaisbru
 #SBATCH --nodes=2
-#SBATCH --ntasks=192
-#SBATCH --mem-per-cpu=10G
+#SBATCH --ntasks-per-node=192
 #SBATCH --cpus-per-task=1
 #SBATCH --mail-user=charles.wilson@etud.polymtl.ca
 #SBATCH --mail-type=ALL
-#SBATCH --job-name=fluid_warmup_jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_2400
+#SBATCH --job-name=fluid_warmup_jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_480
 
 export OMP_NUM_THREADS=1
 ulimit -s 8192
@@ -18,6 +17,6 @@ export PLIJ_PATH=$SCRATCH/graphite_project/particle_laden_impinging_jet
 source $HOME/.dealii
 
 # prm paths are relative to this directory
-cd $PLIJ_PATH/simulations/jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_2400 || exit 1
+cd $PLIJ_PATH/simulations/jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_480 || exit 1
 
-mpirun $HOME/lethe/inst/bin/lethe-fluid-particles ./jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_2400.prm
+mpirun $HOME/lethe/inst/bin/lethe-fluid-particles ./jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_480.prm
