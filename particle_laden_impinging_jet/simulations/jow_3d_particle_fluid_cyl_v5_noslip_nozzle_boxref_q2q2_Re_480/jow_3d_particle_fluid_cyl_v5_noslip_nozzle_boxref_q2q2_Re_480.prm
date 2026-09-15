@@ -415,9 +415,9 @@ subsection linear solver
     set amg preconditioner ilu absolute tolerance = 1e-10
     set amg preconditioner ilu relative tolerance = 1.00
     set amg aggregation threshold                 = 1e-14
-    set amg n cycles                              = 2
+    set amg n cycles                              = 1
     set amg w cycles                              = false
-    set amg smoother sweeps                       = 2
+    set amg smoother sweeps                       = 1
     set amg smoother overlap                      = 1
   end
   subsection void fraction
