@@ -68,6 +68,12 @@ restart.*
 */simulations/*/outputs/
 */simulations/_archive/
 
+# Tests
+*/simulations/*_test/
+
 # Frames for animations
 frames/
 *.mp4
+
+# Misc files
+collision_statistics.csv

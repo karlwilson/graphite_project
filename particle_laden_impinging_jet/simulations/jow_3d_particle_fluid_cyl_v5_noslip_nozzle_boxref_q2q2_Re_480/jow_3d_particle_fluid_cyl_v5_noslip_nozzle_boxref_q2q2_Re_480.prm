@@ -19,9 +19,9 @@ subsection simulation control
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
-  set end control                    = iteration
-  set iteration end                  = 100
-  # set time end                       = 0.1
+  set end control                    = time
+  # set iteration end                  = 100
+  set time end                       = 0.25
   set adapt time step to respect CFL = true
   set max cfl                        = 0.5
   set output boundaries              = true
@@ -286,7 +286,7 @@ subsection restart
   set checkpoint = true
   set frequency  = 25
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------
@@ -385,11 +385,11 @@ subsection non-linear solver
     set solver                = inexact_newton
     set verbosity             = verbose
     set tolerance             = 1e-5
-    set reuse matrix          = true
+    set reuse matrix          = false
     set matrix tolerance      = 0.5
     set max iterations        = 10
     set force rhs calculation = false
-    set reuse preconditioner  = true
+    set reuse preconditioner  = false
   end
 end
 
@@ -402,7 +402,7 @@ subsection linear solver
     set verbosity                             = verbose
     set method                                = gmres
     set max iters                             = 300
-    set max krylov vectors                    = 100
+    set max krylov vectors                    = 300
     set relative residual                     = 1e-4
     set minimum residual                      = 1e-10
     set enable hessians in jacobian           = false
@@ -415,9 +415,9 @@ subsection linear solver
     set amg preconditioner ilu absolute tolerance = 1e-10
     set amg preconditioner ilu relative tolerance = 1.00
     set amg aggregation threshold                 = 1e-14
-    set amg n cycles                              = 1
+    set amg n cycles                              = 2
     set amg w cycles                              = false
-    set amg smoother sweeps                       = 1
+    set amg smoother sweeps                       = 2
     set amg smoother overlap                      = 1
   end
   subsection void fraction
@@ -435,7 +435,7 @@ end
 subsection post-processing
   set verbosity                         = verbose
   set calculation frequency             = 10
-  set output frequency                  = 50
+  set output frequency                  = 10
   set calculate flow rate               = true
   set flow rate name                    = flow_rate
   set calculate average velocities      = false
