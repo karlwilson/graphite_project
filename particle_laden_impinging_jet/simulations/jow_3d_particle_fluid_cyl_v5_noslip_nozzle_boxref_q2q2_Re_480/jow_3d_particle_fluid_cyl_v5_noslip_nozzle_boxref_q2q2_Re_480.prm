@@ -15,15 +15,15 @@ subsection simulation control
   set output name                    = jow_3d_particle_fluid_cyl_v5_noslip_nozzle_boxref_q2q2_Re_480
   set output path                    = ./outputs/
   set output control                 = iteration
-  set output frequency               = 10
+  set output frequency               = 50
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
   set end control                    = time
   # set iteration end                  = 100
-  set time end                       = 0.25
+  set time end                       = 0.5
   set adapt time step to respect CFL = true
-  set max cfl                        = 0.5
+  set max cfl                        = 1
   set output boundaries              = true
 end
 
@@ -194,7 +194,7 @@ subsection model parameters
   subsection contact detection
     set contact detection method = dynamic
     set neighborhood threshold   = 1.3
-    set frequency                = 5    # can be increased between 2-5 when using >16 cores, reduces MPI communication
+    set frequency                = 2    # can be increased between 2-5 when using >16 cores, reduces MPI communication
   end
   subsection load balancing
     set load balance method      = dynamic
@@ -217,17 +217,17 @@ end
 subsection insertion info
   set insertion method                                = volume
   set insertion frequency                             = 1000000000
-  set inserted number of particles at each time step  = 0
-  set insertion distance threshold                    = 1.5
+  set inserted number of particles at each time step  = 3500
+  set insertion distance threshold                    = 8
   subsection insertion acceptance function
-    set Function constants = cyl_r = 0.0033, z_min = -0.073, z_max = -0.0375
+    set Function constants = cyl_r = 0.0033, z_min = -0.073, z_max = -0.02
     set Function expression = if(z > z_min, if(z < z_max, if((x^2 + y^2) < cyl_r^2, 1, 0), 0), 0)
   end
-  set insertion box points coordinates                = -0.0036, -0.0036, -0.05: 0.0036, 0.0036, -0.02  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
+  set insertion box points coordinates                = -0.0032, -0.0032, -0.07325: 0.00324, 0.00324, -0.019  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
   set insertion direction sequence                    = 0, 1, 2
-  set initial velocity                                = 0.0, 0.0, 0.1
+  set initial velocity                                = 0.0, 0.0, 1.0
   set initial angular velocity                        = 0.0, 0.0, 0.0
-  set insertion maximum offset                        = 0.2
+  set insertion maximum offset                        = 3
   set insertion prn seed                              = 42
 end
 
@@ -242,7 +242,7 @@ subsection lagrangian physical properties
   subsection particle type 0    # PEG 3350
     set size distribution type            = uniform
     set diameter                          = 100.e-6
-    set number of particles               = 0
+    set number of particles               = 3500
     set density particles                 = 1092.6  
     set young modulus particles           = 1.e8
     set real young modulus particles      = 5.e8
@@ -305,27 +305,12 @@ subsection boundary conditions
     subsection v
         set Function expression = 0
     end
-    # Poiseuille profile across the bore rather than a plug. A constant value
-    # across the inlet disc is discontinuous with the no-slip bore wall
-    # (boundary 3) at r = rb; that corner singularity is not resolvable by any
-    # mesh and pollutes the whole solve. rb = 0.0036 is the bore radius from
-    # the .geo (rb = wc/Sqrt(2), wc = 0.0072/Sqrt(2)).
-    #
-    # The ramp below is the MEAN velocity, so the centreline peak is twice it
-    # and the flow rate is identical to the old plug profile. max(...,0) guards
-    # against rim nodes landing a rounding error outside r = rb.
+    # Poiseuille profile across the bore rather than a plug
     subsection w
         set Function constants  = rb = 0.0036
         set Function expression = 2*(if(t<0.005, (180*t + 0.1), 1))*max(1 - (x^2 + y^2)/(rb*rb), 0)
     end
   end
-  # Open ambient behind the nozzle. This was a small Dirichlet inflow meant to
-  # supply the fluid entrained by the jet, but prescribing entrainment fixes
-  # the answer and feeds it from the wrong place: entrainment is a radial
-  # influx into the shear layer over z in (0, dp), whereas this face sits at
-  # z = -dc, behind the nozzle exit. With beta = 0 here and on bc 4, both open
-  # boundaries are pure zero-traction, so the jet draws in whatever mass flux
-  # the pressure field demands, through whichever boundary it demands it.
   subsection bc 1
     set id      = 1
     set type    = outlet
