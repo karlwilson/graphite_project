@@ -23,7 +23,7 @@ subsection simulation control
   # set iteration end                  = 100
   set time end                       = 0.5
   set adapt time step to respect CFL = true
-  set max cfl                        = 1
+  set max cfl                        = 0.5
   set output boundaries              = true
 end
 
@@ -216,8 +216,8 @@ end
 
 subsection insertion info
   set insertion method                                = volume
-  set insertion frequency                             = 1000000000
-  set inserted number of particles at each time step  = 3500
+  set insertion frequency                             = 10
+  set inserted number of particles at each time step  = 52
   set insertion distance threshold                    = 8
   subsection insertion acceptance function
     set Function constants = cyl_r = 0.0033, z_min = -0.073, z_max = -0.02
