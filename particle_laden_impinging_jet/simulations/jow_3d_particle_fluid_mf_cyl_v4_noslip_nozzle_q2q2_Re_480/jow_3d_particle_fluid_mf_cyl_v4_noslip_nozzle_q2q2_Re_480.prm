@@ -55,7 +55,7 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v4.msh
-  set initial refinement          = 2
+  set initial refinement          = 1
   set initial boundary refinement = 1
   set boundaries refined          = 2
 end
@@ -221,12 +221,12 @@ subsection insertion info
   set inserted number of particles at each time step  = 0
   set insertion distance threshold                    = 8
   subsection insertion acceptance function
-    set Function constants = cyl_r = 0.0033, z_min = -0.073, z_max = -0.02
+    set Function constants = cyl_r = 0.0033, z_min = -0.05, z_max = -0.01
     set Function expression = if(z > z_min, if(z < z_max, if((x^2 + y^2) < cyl_r^2, 1, 0), 0), 0)
   end
-  set insertion box points coordinates                = -0.0032, -0.0032, -0.07325: 0.00324, 0.00324, -0.019  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
+  set insertion box points coordinates                = -0.0032, -0.0032, -0.051: 0.00324, 0.00324, -0.009  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
   set insertion direction sequence                    = 0, 1, 2
-  set initial velocity                                = 0.0, 0.0, 1.0
+  set initial velocity                                = 0.0, 0.0, 0.5
   set initial angular velocity                        = 0.0, 0.0, 0.0
   set insertion maximum offset                        = 3
   set insertion prn seed                              = 42
@@ -386,8 +386,8 @@ subsection linear solver
   subsection fluid dynamics
     set verbosity                             = verbose
     set method                                = gmres
-    set max iters                             = 300
-    set max krylov vectors                    = 300
+    set max iters                             = 400
+    set max krylov vectors                    = 400
     set relative residual                     = 1e-4
     set minimum residual                      = 1e-8
     set enable hessians in jacobian           = true
