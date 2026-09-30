@@ -55,7 +55,7 @@ end
 subsection mesh
   set type                        = gmsh
   set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v4.msh
-  set initial refinement          = 1
+  set initial refinement          = 2
   set initial boundary refinement = 1
   set boundaries refined          = 2
 end
@@ -166,7 +166,7 @@ subsection cfd-dem
   set fraction rayleigh time        = 0.1
   # set coupling frequency            = 10
   set implicit stabilization        = true
-  set grad-div length scale         = 0.0072
+  set grad-div length scale         = 1
   set particle statistics           = true
 end
 
@@ -368,14 +368,14 @@ end
 
 subsection non-linear solver
   subsection fluid dynamics
-    set solver                = inexact_newton
+    set solver                = newton
     set verbosity             = verbose
     set tolerance             = 1e-5
     set reuse matrix          = true
     set matrix tolerance      = 0.5
     set max iterations        = 10
     set force rhs calculation = false
-    set reuse preconditioner  = false
+    set reuse preconditioner  = true
   end
 end
 
@@ -397,7 +397,7 @@ subsection linear solver
     set preconditioner                        = gcmg
 
     # MG parameters
-    set mg verbosity                          = quiet
+    set mg verbosity                          = verbose
     set mg enable hessians in jacobian        = false
     set mg coarse grid use fe q iso q1        = true
 
@@ -409,7 +409,7 @@ subsection linear solver
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
     set eig estimation cg n iterations        = 20
-    set eig estimation verbosity              = quiet
+    set eig estimation verbosity              = verbose
 
     # Coarse-grid solver
     set mg coarse grid solver                 = amg

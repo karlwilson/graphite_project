@@ -1,0 +1,1258 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   101  100     2  100    99     17    847 --:--:-- --:--:-- --:--:--   863
+okAuthorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Authorization required, but no authorization protocol specified
+
+Running on 128 MPI rank(s)...
+The particle size distribution of particle type 0 is uniform.
+DEM time step is 9.945375e+00% of Rayleigh time step
+Minimum vertex distance between cell vertices: 7.083770e-04
+Minimum cell size to maximum particle diameter ratio: 7.083770e+00
+   Number of active cells:       24800
+   Number of degrees of freedom: 824516
+   Volume of triangulation:      1.570470e-02
+---------------
+Fluid Dynamics
+---------------
+
+
++------------------------------------------------------+------------+------------+
+| Total wallclock time elapsed since start             |     0.617s |            |
+|                                                      |            |            |
+| Section                                  | no. calls |  wall time | % of total |
++------------------------------------------+-----------+------------+------------+
+| Calculate CFL and percolate time vectors |         1 |   0.00143s |      0.23% |
+| Read mesh, manifolds and particles       |         1 |     0.446s |        72% |
+| Setup DoFs                               |         1 |    0.0572s |       9.3% |
++------------------------------------------+-----------+------------+------------+
+
+---------------------------------------------------------------
+Initializing DEM parameters
+Warning: expansion of particle-wall contact list is disabled. 
+This feature is useful in geometries with convex boundaries. 
+Finished initializing DEM parameters
+DEM time step is 9.174312e-08 s
+--------------
+Void Fraction
+--------------
+  -Tolerance of iterative solver is : 1.000000e-15
+  -Iterative solver took : 2.900000e+01 steps 
+-----------
+Flow rates
+-----------
+Flow rate at boundary 0: -4.071444e-06 m^3/s
+Flow rate at boundary 1: 0.000000e+00 m^3/s
+Flow rate at boundary 2: 0.000000e+00 m^3/s
+Flow rate at boundary 3: 1.339102e-36 m^3/s
+Flow rate at boundary 4: 0.000000e+00 m^3/s
+
+*********************************************************************************
+Transient iteration: 1        Time: 4e-06    Time step: 4e-06    CFL: 0.00242663
+*********************************************************************************
+************************************************************************
+0 particles of type 0 were inserted, 3500 particles of type 0 remaining
+************************************************************************
+--------------
+Void Fraction
+--------------
+  -Tolerance of iterative solver is : 1.000000e-15
+  -Iterative solver took : 2.900000e+01 steps 
+  -Tolerance of iterative solver is : 1.000000e-15
+  -Iterative solver took : 0.000000e+00 steps 
+  -Tolerance of iterative solver is : 1.000000e-15
+  -Iterative solver took : 0.000000e+00 steps 
+  -Tolerance of iterative solver is : 1.000000e-15
+  -Iterative solver took : 0.000000e+00 steps 
+  -Tolerance of iterative solver is : 1.000000e-15
+  -Iterative solver took : 0.000000e+00 steps 
+---------------
+Fluid Dynamics
+---------------
+
+  -Levels of MG preconditioner:
+    Level 0: 824516 DoFs, 24800 cells
+
+
+  -Eigenvalue estimation level 0:
+    Relaxation parameter: 7.172380e-01
+    Minimum eigenvalue: 2.112481e+00
+    Maximum eigenvalue: 2.534977e+00
+
+Newton iteration: 0  - Residual:  1.067348e-04
+  -Tolerance of iterative solver is : 1.067348e-08
+---------------------------------------------------------
+TimerOutput objects finalize timed values printed to the
+screen by communicating over MPI in their destructors.
+Since an exception is currently uncaught, this
+synchronization (and subsequent output) will be skipped
+to avoid a possible deadlock.
+---------------------------------------------------------
+
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+----------------------------------------------------
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+
+
+----------------------------------------------------
+Exception on processing: 
+std::exception
+Aborting!
+----------------------------------------------------
+--------------------------------------------------------------------------
+Primary job  terminated normally, but 1 process returned
+a non-zero exit code. Per user-direction, the job has been aborted.
+--------------------------------------------------------------------------
+--------------------------------------------------------------------------
+mpirun detected that one or more processes exited with non-zero status, thus causing
+the job to be terminated. The first process to do so was:
+
+  Process name: [[21160,1],31]
+  Exit code:    1
+--------------------------------------------------------------------------
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100   135  100     2  100   133     19   1284 --:--:-- --:--:-- --:--:--  1310
+ok
