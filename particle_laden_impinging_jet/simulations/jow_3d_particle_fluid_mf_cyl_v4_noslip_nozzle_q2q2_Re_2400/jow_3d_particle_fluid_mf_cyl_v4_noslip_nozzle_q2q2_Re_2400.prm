@@ -12,7 +12,7 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_boxref_q2q2_Re_2400
+  set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_2400
   set output path                    = ./outputs/
   set output control                 = iteration
   set output frequency               = 100

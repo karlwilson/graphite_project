@@ -12,7 +12,7 @@ set dimension = 3
 
 subsection simulation control
   set method                         = bdf2
-  set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_boxref_q2q2_Re_480
+  set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_480
   set output path                    = ./outputs/
   set output control                 = iteration
   set output frequency               = 50
@@ -148,7 +148,7 @@ end
 
 subsection cfd-dem
   set grad div                      = true 
-  set void fraction time derivative = true
+  set void fraction time derivative = false
   set interpolated void fraction    = true
   set vans model                    = modelA
   set drag force                    = true
@@ -371,8 +371,7 @@ subsection non-linear solver
     set solver                = newton
     set verbosity             = verbose
     set tolerance             = 1e-5
-    set reuse matrix          = true
-    set matrix tolerance      = 0.5
+    # set matrix tolerance      = 0.5
     set max iterations        = 10
     set force rhs calculation = false
     set reuse preconditioner  = true
