@@ -15,12 +15,12 @@ subsection simulation control
   set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_2400
   set output path                    = ./outputs/
   set output control                 = iteration
-  set output frequency               = 100
+  set output frequency               = 10
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
   set end control                    = iteration
-  set iteration end                  = 100
+  set iteration end                  = 1000
   # set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
@@ -56,7 +56,7 @@ subsection mesh
   set type                        = gmsh
   set file name                   = ../../meshes/jet_on_wall_3d_lab_specs_cyl_v4.msh
   set initial refinement          = 1
-  set initial boundary refinement = 0
+  set initial boundary refinement = 1
   set boundaries refined          = 2
 end
 
@@ -148,7 +148,7 @@ end
 
 subsection cfd-dem
   set grad div                      = true 
-  set void fraction time derivative = true
+  set void fraction time derivative = false
   set interpolated void fraction    = true
   set vans model                    = modelA
   set drag force                    = true
@@ -164,9 +164,9 @@ subsection cfd-dem
   set project particle forces       = false
   set dem iteration control         = fraction of rayleigh time
   set fraction rayleigh time        = 0.1
-  set coupling frequency            = 10
+  # set coupling frequency            = 10
   set implicit stabilization        = true
-  set grad-div length scale         = 1
+  set grad-div length scale         = 0.0072
   set particle statistics           = true
 end
 
@@ -217,18 +217,18 @@ end
 
 subsection insertion info
   set insertion method                                = volume
-  set insertion frequency                             = 1000000000
-  set inserted number of particles at each time step  = 100000
-  set insertion distance threshold                    = 1.5
+  set insertion frequency                             = 10
+  set inserted number of particles at each time step  = 0   # 52 after warmup
+  set insertion distance threshold                    = 8
   subsection insertion acceptance function
-    set Function constants = cyl_r = 0.0036, z_min = -0.073, z_max = -0.0375
+    set Function constants = cyl_r = 0.0033, z_min = -0.05, z_max = -0.01
     set Function expression = if(z > z_min, if(z < z_max, if((x^2 + y^2) < cyl_r^2, 1, 0), 0), 0)
   end
-  set insertion box points coordinates                = -0.0036, -0.0036, -0.073: 0.0036, 0.0036, -0.0375  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
+  set insertion box points coordinates                = -0.0032, -0.0032, -0.051: 0.00324, 0.00324, -0.009  # the nozzle is an inscribed cylinder in this box. must allow gap between inserted particles and nozzle wall, accounting for random offset
   set insertion direction sequence                    = 0, 1, 2
-  set initial velocity                                = 0.0, 0.0, 0.0
+  set initial velocity                                = 0.0, 0.0, 4
   set initial angular velocity                        = 0.0, 0.0, 0.0
-  set insertion maximum offset                        = 0.2
+  set insertion maximum offset                        = 3
   set insertion prn seed                              = 42
 end
 
@@ -243,7 +243,7 @@ subsection lagrangian physical properties
   subsection particle type 0    # PEG 3350
     set size distribution type            = uniform
     set diameter                          = 100.e-6
-    set number of particles               = 100000
+    set number of particles               = 3500
     set density particles                 = 1092.6  
     set young modulus particles           = 1.e8
     set real young modulus particles      = 5.e8
@@ -306,22 +306,16 @@ subsection boundary conditions
     subsection v
         set Function expression = 0
     end
+    # Poiseuille profile across the bore rather than a plug
     subsection w
-        set Function expression = if(t<0.005, (900*t + 0.5), 5)
+        set Function constants  = rb = 0.0036
+        set Function expression = 2*(if(t<0.01, (500*t + 0.1), 1))*max(1 - (x^2 + y^2)/(rb*rb), 0)
     end
   end
   subsection bc 1
     set id      = 1
-    set type    = function
-    subsection u
-        set Function expression = 0
-    end
-    subsection v
-        set Function expression = 0
-    end
-    subsection w
-        set Function expression = 0.05
-    end
+    set type    = outlet
+    set beta    = 0
   end
   subsection bc 2
     set id      = 2
@@ -334,9 +328,9 @@ subsection boundary conditions
   subsection bc 4
     set id      = 4
     set type    = outlet
+    set beta    = 0
   end
 end
-
 
 #---------------------------------------------------
 # DEM Boundary Conditions
@@ -379,6 +373,7 @@ subsection non-linear solver
     set max iterations        = 10
     set force rhs calculation = false
     set reuse preconditioner  = true
+    set abort at convergence failure = true
   end
 end
 
@@ -391,7 +386,7 @@ subsection linear solver
     set verbosity                             = verbose
     set method                                = gmres
     set max iters                             = 400
-    set max krylov vectors                    = 200
+    set max krylov vectors                    = 400
     set relative residual                     = 1e-4
     set minimum residual                      = 1e-8
     set enable hessians in jacobian           = true
@@ -400,8 +395,8 @@ subsection linear solver
     set preconditioner                        = gcmg
 
     # MG parameters
-    set mg verbosity                          = quiet
-    set mg enable hessians in jacobian        = false
+    set mg verbosity                          = verbose
+    set mg enable hessians in jacobian        = true
     set mg coarse grid use fe q iso q1        = true
 
     # MG smoother parameters
@@ -412,10 +407,16 @@ subsection linear solver
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
     set eig estimation cg n iterations        = 20
-    set eig estimation verbosity              = quiet
+    set eig estimation verbosity              = verbose
 
     # Coarse-grid solver
     set mg coarse grid solver                 = amg
+  end
+  subsection void fraction
+    set verbosity                             = verbose
+    set method                                = gmres
+    set relative residual                     = 1e-15
+    set minimum residual                      = 1e-15
   end
 end
 
@@ -429,7 +430,7 @@ subsection post-processing
   set output frequency                  = 10
   set calculate flow rate               = true
   set flow rate name                    = flow_rate
-  set calculate average velocities      = true
+  set calculate average velocities      = false
   set initial time for average velocity = 0.5
   subsection particle wall collision statistics
     set enable particle wall collision statistics = true

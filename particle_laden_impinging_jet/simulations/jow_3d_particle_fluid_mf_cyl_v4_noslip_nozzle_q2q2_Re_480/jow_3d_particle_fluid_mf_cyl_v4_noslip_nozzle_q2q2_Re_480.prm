@@ -19,11 +19,11 @@ subsection simulation control
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
-  set end control                    = iteration
-  set iteration end                  = 200
-  # set time end                       = 0.5
+  set end control                    = time
+  # set iteration end                  = 200
+  set time end                       = 0.5
   set adapt time step to respect CFL = true
-  set max cfl                        = 0.5
+  set max cfl                        = 1.0
   set output boundaries              = true
 end
 
@@ -166,7 +166,7 @@ subsection cfd-dem
   set fraction rayleigh time        = 0.1
   # set coupling frequency            = 10
   set implicit stabilization        = true
-  set grad-div length scale         = 1
+  set grad-div length scale         = 0.0072
   set particle statistics           = true
 end
 
@@ -218,7 +218,7 @@ end
 subsection insertion info
   set insertion method                                = volume
   set insertion frequency                             = 10
-  set inserted number of particles at each time step  = 0
+  set inserted number of particles at each time step  = 52
   set insertion distance threshold                    = 8
   subsection insertion acceptance function
     set Function constants = cyl_r = 0.0033, z_min = -0.05, z_max = -0.01
@@ -287,7 +287,7 @@ subsection restart
   set checkpoint = true
   set frequency  = 25
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------
@@ -375,6 +375,7 @@ subsection non-linear solver
     set max iterations        = 10
     set force rhs calculation = false
     set reuse preconditioner  = true
+    set abort at convergence failure = true
   end
 end
 
@@ -397,7 +398,7 @@ subsection linear solver
 
     # MG parameters
     set mg verbosity                          = verbose
-    set mg enable hessians in jacobian        = false
+    set mg enable hessians in jacobian        = true
     set mg coarse grid use fe q iso q1        = true
 
     # MG smoother parameters
