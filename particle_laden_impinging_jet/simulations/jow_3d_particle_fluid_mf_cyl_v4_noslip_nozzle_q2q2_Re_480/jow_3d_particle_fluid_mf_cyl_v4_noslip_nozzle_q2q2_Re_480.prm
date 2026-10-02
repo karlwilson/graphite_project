@@ -15,7 +15,7 @@ subsection simulation control
   set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_480
   set output path                    = ./outputs/
   set output control                 = iteration
-  set output frequency               = 50
+  set output frequency               = 1
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
@@ -218,7 +218,7 @@ end
 subsection insertion info
   set insertion method                                = volume
   set insertion frequency                             = 10
-  set inserted number of particles at each time step  = 52
+  set inserted number of particles at each time step  = 0
   set insertion distance threshold                    = 8
   subsection insertion acceptance function
     set Function constants = cyl_r = 0.0033, z_min = -0.05, z_max = -0.01
@@ -416,9 +416,8 @@ subsection linear solver
   end
   subsection void fraction
     set verbosity                             = verbose
-    set method                                = gmres
-    set relative residual                     = 1e-15
-    set minimum residual                      = 1e-15
+    set relative residual                     = 1e-10
+    set minimum residual                      = 1e-13
   end
 end
 
@@ -428,8 +427,8 @@ end
 
 subsection post-processing
   set verbosity                         = verbose
-  set calculation frequency             = 10
-  set output frequency                  = 10
+  set calculation frequency             = 1
+  set output frequency                  = 1
   set calculate flow rate               = true
   set flow rate name                    = flow_rate
   set calculate average velocities      = false
