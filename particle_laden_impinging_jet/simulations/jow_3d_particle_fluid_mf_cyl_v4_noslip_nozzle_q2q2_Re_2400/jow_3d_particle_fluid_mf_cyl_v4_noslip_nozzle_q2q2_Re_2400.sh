@@ -16,9 +16,9 @@ export PLIJ_PATH=$SCRATCH/graphite_project/particle_laden_impinging_jet
 source $HOME/.dealii
 
 # prm paths are relative to this directory
-cd $PLIJ_PATH/simulations/jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_480 || exit 1
+cd $PLIJ_PATH/simulations/jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_2400 || exit 1
 
-PRM=jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_480.prm
+PRM=jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_2400.prm
 MESH=$PLIJ_PATH/meshes/jet_on_wall_3d_lab_specs_cyl_v4.msh
 
 # Stage the mesh onto each node's local disk. deal.II needs the coarse mesh on
