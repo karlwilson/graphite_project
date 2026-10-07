@@ -65,7 +65,7 @@
 restart.*
 
 # Simulation outputs and checkpoints
-*/simulations/*/outputs/
+*/simulations/*/outputs*/
 */simulations/_archive/
 
 # Tests

@@ -13,15 +13,15 @@ set dimension = 3
 subsection simulation control
   set method                         = bdf2
   set output name                    = jow_3d_particle_fluid_mf_cyl_v4_noslip_nozzle_q2q2_Re_2400
-  set output path                    = ./outputs/
+  set output path                    = ./outputs_dedt_on/
   set output control                 = iteration
   set output frequency               = 10
   set subdivision                    = 2
   set log frequency                  = 1
   set time step                      = 0.00001
-  set end control                    = iteration
-  set iteration end                  = 1000
-  # set time end                       = 1
+  set end control                    = time
+  # set iteration end                  = 1000
+  set time end                       = 1
   set adapt time step to respect CFL = true
   set max cfl                        = 1
   set output boundaries              = true
@@ -148,7 +148,7 @@ end
 
 subsection cfd-dem
   set grad div                      = true 
-  set void fraction time derivative = false
+  set void fraction time derivative = true
   set interpolated void fraction    = true
   set vans model                    = modelA
   set drag force                    = true
@@ -182,7 +182,7 @@ subsection void fraction
   set qcm sphere equal cell volume  = false
   set qcm filter type               = spherical
   set quadrature rule               = gauss
-  set n quadrature points           = 0   # default value of 0 means n = void_fraction_degree + 1 for Gauss quadrature
+  set n quadrature points           = 3   # default value of 0 means n = void_fraction_degree + 1 for Gauss quadrature
   set project particle velocity     = false
 end
 
@@ -218,7 +218,7 @@ end
 subsection insertion info
   set insertion method                                = volume
   set insertion frequency                             = 10
-  set inserted number of particles at each time step  = 0   # 52 after warmup
+  set inserted number of particles at each time step  = 52    # 52 after warmup
   set insertion distance threshold                    = 8
   subsection insertion acceptance function
     set Function constants = cyl_r = 0.0033, z_min = -0.05, z_max = -0.01
@@ -243,7 +243,7 @@ subsection lagrangian physical properties
   subsection particle type 0    # PEG 3350
     set size distribution type            = uniform
     set diameter                          = 100.e-6
-    set number of particles               = 3500
+    set number of particles               = 20000
     set density particles                 = 1092.6  
     set young modulus particles           = 1.e8
     set real young modulus particles      = 5.e8
@@ -285,9 +285,9 @@ end
 
 subsection restart
   set checkpoint = true
-  set frequency  = 25
+  set frequency  = 50
   set filename   = restart
-  set restart    = false
+  set restart    = true
 end
 
 #---------------------------------------------------
@@ -309,7 +309,7 @@ subsection boundary conditions
     # Poiseuille profile across the bore rather than a plug
     subsection w
         set Function constants  = rb = 0.0036
-        set Function expression = 2*(if(t<0.01, (500*t + 0.1), 1))*max(1 - (x^2 + y^2)/(rb*rb), 0)
+        set Function expression = 2*(if(t<0.01, (500*t + 0.1), 5))*max(1 - (x^2 + y^2)/(rb*rb), 0)
     end
   end
   subsection bc 1
@@ -395,7 +395,7 @@ subsection linear solver
     set preconditioner                        = gcmg
 
     # MG parameters
-    set mg verbosity                          = verbose
+    set mg verbosity                          = quiet
     set mg enable hessians in jacobian        = true
     set mg coarse grid use fe q iso q1        = true
 
@@ -407,7 +407,7 @@ subsection linear solver
     # Eigenvalue estimation parameters
     set eig estimation smoothing range        = 10
     set eig estimation cg n iterations        = 20
-    set eig estimation verbosity              = verbose
+    set eig estimation verbosity              = quiet
 
     # Coarse-grid solver
     set mg coarse grid solver                 = amg
@@ -415,8 +415,8 @@ subsection linear solver
   subsection void fraction
     set verbosity                             = verbose
     set method                                = gmres
-    set relative residual                     = 1e-15
-    set minimum residual                      = 1e-15
+    set relative residual                     = 1e-10
+    set minimum residual                      = 1e-13
   end
 end
 
@@ -434,7 +434,7 @@ subsection post-processing
   set initial time for average velocity = 0.5
   subsection particle wall collision statistics
     set enable particle wall collision statistics = true
-    set collision statistics file                 = collision_statistics.csv
+    set collision statistics file                 = collision_statistics_dedt_on.csv
     set verbosity                                 = verbose
     set log collisions with all walls             = false
     set wall boundary ids                         = 2
